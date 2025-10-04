@@ -5,7 +5,6 @@ class_name UIHealth
 
 var _healthBars = {}
 var _registeredPendingCreatures: Array = []
-var _emptyHealthBars: Array = []
 
 var _maxDistanceFromPlayer = 40
 
@@ -14,24 +13,7 @@ func _ready() -> void:
 	return
 
 func _process(delta: float) -> void:
-	updateRegisteredCreatures()
 	updateCreatureHealthBars(delta)
-	return
-	
-func updateRegisteredCreatures() -> void:
-	for i in range(_registeredPendingCreatures.size() - 1, -1, -1):
-		var creature: Creature = _registeredPendingCreatures[i]
-		if !is_instance_valid(creature) || creature.isDead():
-			_registeredPendingCreatures.remove_at(i)
-			continue
-			
-		var shouldBeHidden = creature.getHealth() >= creature.getMaxHealth() \
-			or Global.player.global_position.distance_to(creature.global_position) > _maxDistanceFromPlayer
-		shouldBeHidden = false
-			
-		if !shouldBeHidden:
-			registerCreatureHealthBar(creature)
-			_registeredPendingCreatures.remove_at(i)
 	return
 
 func registerCreatureHealthBar(creature: Creature) -> void:
@@ -39,12 +21,6 @@ func registerCreatureHealthBar(creature: Creature) -> void:
 	if _healthBars.has(id):
 		return
 		
-	if _emptyHealthBars.size() > 0:
-		var existingHealthBar: HealthBar = _emptyHealthBars[0]
-		_emptyHealthBars.remove_at(0)
-		existingHealthBar.creature = creature
-		return
-	
 	var panelContainer = _panelContainer.duplicate(DuplicateFlags.DUPLICATE_GROUPS)
 	panelContainer.name = id
 	add_child(panelContainer)
@@ -62,17 +38,25 @@ func unregisterCreatureHealthBar(creature: Creature) -> void:
 		return
 	
 	var creatureHealthBar: HealthBar = _healthBars[id]
-	_emptyHealthBars.append(creatureHealthBar)
-	creatureHealthBar.container.hide()
-		
+	creatureHealthBar.container.queue_free()
+	creatureHealthBar.queue_free()
+	
 	_healthBars.erase(id)
 	return
 
 func updateCreatureHealthBars(delta: float) -> void:
-	for creatureHealthBar: HealthBar in _healthBars.values():
+	for key in _healthBars.keys():
+		var creatureHealthBar: HealthBar = _healthBars[key]
+
+		if !is_instance_valid(creatureHealthBar):
+			_healthBars.erase(key)
+			continue
+			
 		var creature: Creature = creatureHealthBar.creature
 		if !is_instance_valid(creature) or creature.isDead():
-			unregisterCreatureHealthBar(creature)
+			creatureHealthBar.container.queue_free()
+			creatureHealthBar.queue_free()
+			_healthBars.erase(key)
 			continue
 		
 		var shouldBeHidden = creature.getHealth() >= creature.getMaxHealth() \
