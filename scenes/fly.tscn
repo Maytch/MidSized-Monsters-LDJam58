@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnjn4jpty7agr"]
+
+[ext_resource type="Script" uid="uid://m7f3hnbgsepk" path="res://scripts/creature.gd" id="1_xr3pu"]
+[ext_resource type="Texture2D" uid="uid://d3chblv1cc367" path="res://sprites/fly.png" id="2_2lkvx"]
+
+[node name="Fly" type="Node3D"]
+script = ExtResource("1_xr3pu")
+_maxHealth = 40.0
+_attackDamage = 4.0
+_movementSpeed = 0.5
+_maxBounceLeft = 0.1
+_bounceSpeed = 2
+_bodyAnimationSpeed = 8.0
+
+[node name="Body" type="Node3D" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24, 0)
+shaded = true
+alpha_cut = 2
+texture_filter = 2
+texture = ExtResource("2_2lkvx")
+hframes = 2

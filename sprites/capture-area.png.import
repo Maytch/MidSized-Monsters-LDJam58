@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2dp66ogchyo7"
-path="res://.godot/imported/slime-friend.png-37d806c33a6569c4018de38e6de6b5c9.ctex"
+uid="uid://1e8et2jrj5st"
+path="res://.godot/imported/capture-area.png-331ea0df7d58c9f3f30755bfe09b4b1e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/slime-friend.png"
-dest_files=["res://.godot/imported/slime-friend.png-37d806c33a6569c4018de38e6de6b5c9.ctex"]
+source_file="res://sprites/capture-area.png"
+dest_files=["res://.godot/imported/capture-area.png-331ea0df7d58c9f3f30755bfe09b4b1e.ctex"]
 
 [params]
 

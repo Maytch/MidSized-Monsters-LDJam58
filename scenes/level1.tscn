@@ -1,12 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://7ctrgjrqpkwl"]
+[gd_scene load_steps=8 format=3 uid="uid://7ctrgjrqpkwl"]
 
-[ext_resource type="Script" uid="uid://d03xlu343tmde" path="res://scripts/player.gd" id="1_ejswk"]
-[ext_resource type="Texture2D" uid="uid://ceyfsa1rhpru" path="res://sprites/player.png" id="2_bbk5w"]
-[ext_resource type="Script" uid="uid://m7f3hnbgsepk" path="res://scripts/creature.gd" id="3_conm7"]
-[ext_resource type="Texture2D" uid="uid://ch237jqnb8eos" path="res://sprites/slime.png" id="4_d3jkd"]
-[ext_resource type="Texture2D" uid="uid://c2dp66ogchyo7" path="res://sprites/slime-friend.png" id="5_u3awl"]
-[ext_resource type="Texture2D" uid="uid://d3chblv1cc367" path="res://sprites/fly.png" id="6_2ku1j"]
-[ext_resource type="PackedScene" uid="uid://b1fvheoq5ueh1" path="res://scenes/area_of_effect.tscn" id="7_f31uk"]
+[ext_resource type="PackedScene" uid="uid://bky01l3kbljm5" path="res://scenes/player.tscn" id="1_6sh32"]
+[ext_resource type="PackedScene" uid="uid://co275n4lpsop1" path="res://scenes/slime.tscn" id="4_ejswk"]
+[ext_resource type="PackedScene" uid="uid://beqdk2etqoq46" path="res://scenes/slime_friend.tscn" id="5_bbk5w"]
+[ext_resource type="PackedScene" uid="uid://bnjn4jpty7agr" path="res://scenes/fly.tscn" id="6_conm7"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_lgp48"]
 size = Vector3(10, 0.1, 10)
@@ -23,81 +20,16 @@ ambient_light_color = Color(0.403922, 0.592157, 1, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 mesh = SubResource("BoxMesh_lgp48")
 
-[node name="Player" type="Node3D" parent="."]
-script = ExtResource("1_ejswk")
+[node name="Player" parent="." instance=ExtResource("1_6sh32")]
 
-[node name="Body" type="Node3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.15484e-05, 0)
-
-[node name="Sprite3D" type="Sprite3D" parent="Player/Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24030928, 0)
-shaded = true
-alpha_cut = 2
-texture_filter = 2
-texture = ExtResource("2_bbk5w")
-
-[node name="Camera3D" type="Camera3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 0.699115, 0.71501, 0, -0.71501, 0.699115, 0, 2.03141, 1.76424)
-fov = 65.0
-
-[node name="AreaOfEffect" parent="Player" instance=ExtResource("7_f31uk")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.946, 0.001, 0.83)
-
-[node name="Slime" type="Node3D" parent="."]
+[node name="Slime" parent="." instance=ExtResource("4_ejswk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2902969, 0, 0)
-script = ExtResource("3_conm7")
-_maxHealth = 50.0
-_attackDamage = 10.0
-_movementSpeed = 0.5
 
-[node name="Body" type="Node3D" parent="Slime"]
-
-[node name="Sprite3D" type="Sprite3D" parent="Slime/Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24, 0)
-shaded = true
-alpha_cut = 2
-texture_filter = 2
-texture = ExtResource("4_d3jkd")
-hframes = 2
-
-[node name="SlimeFriend" type="Node3D" parent="."]
+[node name="SlimeFriend" parent="." instance=ExtResource("5_bbk5w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1764108, 0, -1.2645233)
-script = ExtResource("3_conm7")
-_isFriend = true
-_level = 2.0
-_maxHealth = 60.0
-_attackDamage = 6.0
-_movementSpeed = 0.5
 
-[node name="Body" type="Node3D" parent="SlimeFriend"]
-
-[node name="Sprite3D" type="Sprite3D" parent="SlimeFriend/Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24, 0)
-shaded = true
-alpha_cut = 2
-texture_filter = 2
-texture = ExtResource("5_u3awl")
-hframes = 2
-
-[node name="Fly" type="Node3D" parent="."]
+[node name="Fly" parent="." instance=ExtResource("6_conm7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0069091, 0, 0.30009627)
-script = ExtResource("3_conm7")
-_maxHealth = 40.0
-_attackDamage = 4.0
-_movementSpeed = 0.5
-_maxBounceLeft = 0.1
-_bounceSpeed = 2
-_bodyAnimationSpeed = 8.0
-
-[node name="Body" type="Node3D" parent="Fly"]
-
-[node name="Sprite3D" type="Sprite3D" parent="Fly/Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24, 0)
-shaded = true
-alpha_cut = 2
-texture_filter = 2
-texture = ExtResource("6_2ku1j")
-hframes = 2
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_dopym")
@@ -106,8 +38,10 @@ environment = SubResource("Environment_dopym")
 transform = Transform3D(-0.503243, -0.63833, -0.582478, 0.0945147, -0.710666, 0.697152, -0.858961, 0.295784, 0.41797, -1.0772, 2.48507, 2.25749)
 light_color = Color(1, 0.878484, 0.727108, 1)
 light_energy = 2.231
+light_cull_mask = 4294967293
 shadow_enabled = true
 shadow_bias = 0.05
 shadow_normal_bias = 1.0
+shadow_caster_mask = 4294967293
 directional_shadow_blend_splits = true
 sky_mode = 1

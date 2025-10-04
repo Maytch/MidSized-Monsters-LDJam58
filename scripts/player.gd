@@ -1,7 +1,7 @@
 extends Living
 
 @onready var _camera = $Camera3D
-@onready var _areaOfEffect = $AreaOfEffect
+@onready var _areaOfEffect: AreaOfEffect = $AreaOfEffect
 
 enum PlayerAction { POTION, CAPTURE, SUMMON }
 
@@ -14,6 +14,8 @@ var _maxCaptureCooldown = 2.0
 var _summonCooldown = 0.0
 var _maxSummonCooldown = 5.0
 
+var _selectedCreatureToSummon: Creature = null
+
 func _ready() -> void:
 	Global.player = self
 	Global.camera = _camera
@@ -22,8 +24,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	super(delta)
 	cooldownActions(delta)
-	processPlayerInput()
 	updateAreaOfEffect()
+	processPlayerInput()
 	
 	return
 
@@ -36,16 +38,19 @@ func processPlayerInput() -> void:
 	_moveX = Input.get_axis("move_left", "move_right")
 	_moveZ = Input.get_axis("move_forwards", "move_backwards")
 	
-	if Input.is_action_just_pressed("select_potion"):
+	if Input.is_action_just_pressed("select_potion_action"):
 		_currentAction = PlayerAction.POTION
+		_areaOfEffect.setTexture(Global.AreaType.POTION)
 	
-	if Input.is_action_just_pressed("select_capture"):
+	if Input.is_action_just_pressed("select_capture_action"):
 		_currentAction = PlayerAction.CAPTURE
+		_areaOfEffect.setTexture(Global.AreaType.CAPTURE)
 	
-	if Input.is_action_just_pressed("select_summon"):
+	if Input.is_action_just_pressed("select_summon_action"):
 		_currentAction = PlayerAction.SUMMON
+		_areaOfEffect.setTexture(Global.AreaType.SUMMON)
 		
-	if Input.is_action_just_pressed("select"):
+	if Input.is_action_just_pressed("select_area"):
 		match _currentAction:
 			PlayerAction.POTION:
 				throwPotion()
@@ -58,24 +63,47 @@ func processPlayerInput() -> void:
 	
 func throwPotion() -> void:
 	if isActionOnCooldown(_currentAction):
-		Global.showError("Potion still on cooldown")
+		Global.showError("Potion still on cooldown!")
+		return
+	
+	if Global.potionCount <= 0:
+		Global.showError("You've run out of potions!")
 		return
 		
+	var projectile = spawnProjectile()
+	projectile.setupPotion(Global.potionHealAmount)
+	
+	Global.potionCount -= 1
 	_potionCooldown = _maxPotionCooldown
 	return
 	
 func throwCapture() -> void:
 	if isActionOnCooldown(_currentAction):
-		Global.showError("Capture still on cooldown")
+		Global.showError("Capture still on cooldown!")
+		return
+	
+	if Global.captureCount <= 0:
+		Global.showError("You've run out of captures!")
 		return
 		
+	var projectile = spawnProjectile()
+	projectile.setupCapture()
+	
+	Global.captureCount -= 1
 	_captureCooldown = _maxCaptureCooldown
 	return
 	
 func throwSummon() -> void:
 	if isActionOnCooldown(_currentAction):
-		Global.showError("Summon still on cooldown")
+		Global.showError("Summon still on cooldown!")
 		return
+		
+	if _selectedCreatureToSummon == null:
+		Global.showError("No creature selected to summon!")
+		return
+		
+	var projectile = spawnProjectile()
+	projectile.setupSummon(_selectedCreatureToSummon)
 		
 	_summonCooldown = _maxSummonCooldown
 	return
@@ -127,3 +155,15 @@ func updateAreaOfEffect() -> void:
 	_areaOfEffect.global_position = projectFrom + projectDirection * t
 	
 	return
+
+func spawnProjectile() -> Projectile:
+	var projectile: Projectile = Global.projectileScene.instantiate()
+	Global.add_child(projectile)
+	
+	var targetPosition = _areaOfEffect.global_position
+	var spawnLocation = global_position + global_position.direction_to(_areaOfEffect.global_position) * 0.25
+	spawnLocation = Vector3(spawnLocation.x, 0.5, spawnLocation.z)
+	
+	projectile.spawn(spawnLocation, targetPosition)
+	
+	return projectile

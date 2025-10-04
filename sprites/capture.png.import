@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2dp66ogchyo7"
-path="res://.godot/imported/slime-friend.png-37d806c33a6569c4018de38e6de6b5c9.ctex"
+uid="uid://budohfj7443ya"
+path="res://.godot/imported/capture.png-a8536cd99a915ff27c54db5918c0ce58.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/slime-friend.png"
-dest_files=["res://.godot/imported/slime-friend.png-37d806c33a6569c4018de38e6de6b5c9.ctex"]
+source_file="res://sprites/capture.png"
+dest_files=["res://.godot/imported/capture.png-a8536cd99a915ff27c54db5918c0ce58.ctex"]
 
 [params]
 
@@ -23,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -37,4 +37,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

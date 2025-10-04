@@ -1,0 +1,26 @@
+[gd_scene load_steps=7 format=3 uid="uid://dj8vybosfs3q4"]
+
+[ext_resource type="Script" uid="uid://b234x6bnxcxlm" path="res://scripts/projectile.gd" id="1_q3m7n"]
+[ext_resource type="Texture2D" uid="uid://budohfj7443ya" path="res://sprites/capture.png" id="2_jxwu6"]
+[ext_resource type="Texture2D" uid="uid://bgdywiw2vvaih" path="res://sprites/potion.png" id="2_q3m7n"]
+[ext_resource type="Texture2D" uid="uid://u82yks32qw5r" path="res://sprites/capture-success.png" id="4_w7nm8"]
+[ext_resource type="Texture2D" uid="uid://btkgbs1a6jrpm" path="res://sprites/attack-area.png" id="5_ejmht"]
+[ext_resource type="Texture2D" uid="uid://bvifylprnh7al" path="res://sprites/attack-area-friend.png" id="6_031o2"]
+
+[node name="Projectile" type="Node3D"]
+script = ExtResource("1_q3m7n")
+_captureTexture = ExtResource("2_jxwu6")
+_potionTexture = ExtResource("2_q3m7n")
+_summonTexture = ExtResource("4_w7nm8")
+_attackTexture = ExtResource("5_ejmht")
+_attackFriendTexture = ExtResource("6_031o2")
+
+[node name="Body" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.15484e-05, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24030928, 0)
+shaded = true
+alpha_cut = 2
+texture_filter = 2
+texture = ExtResource("2_q3m7n")
