@@ -5,10 +5,19 @@
 
 [node name="SlimeFriend" type="Node3D"]
 script = ExtResource("1_ovstr")
+_baseAttackBehaviourTime = null
+_creatureType = null
+_creatureName = null
 _isFriend = true
+_level = null
 _maxHealth = 60.0
 _attackDamage = 6.0
 _movementSpeed = 0.5
+_hasBounce = null
+_maxBounceLeft = null
+_maxBounceUp = null
+_bounceSpeed = null
+_bodyAnimationSpeed = null
 
 [node name="Body" type="Node3D" parent="."]
 

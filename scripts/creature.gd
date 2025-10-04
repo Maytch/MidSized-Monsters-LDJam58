@@ -21,15 +21,18 @@ var _key = ""
 @export var _isFriend = false
 @export var _level = 1
 @export var _maxHealth = 10.0
-var _currentHealth = _maxHealth
+var _currentHealth = 0.0
 @export var _attackDamage = 2.0
 @export var _creatureTexture: Texture2D
 @export var _creatureFriendTexture: Texture2D
 
+var _spawnTime = 10.0
+
 func _ready() -> void:
 	super()
 	_movementSpeed *= randf_range(0.9, 1.1)
-	_currentHealth = _maxHealth
+	if _currentHealth <= 0:
+		_currentHealth = _maxHealth
 	
 	if _isFriend:
 		Global.friendCreatures.append(self)
@@ -64,7 +67,6 @@ func setup(creatureRecord: CreatureRecord):
 	_isFriend = true
 	
 	_currentHealth = creatureRecord.currentHealth
-	_maxHealth = creatureRecord.maxHealth
 	return
 
 func processBehaviour(delta: float) -> void:
@@ -77,7 +79,7 @@ func processBehaviour(delta: float) -> void:
 		chooseNewBehaviour()
 		startNewBehaviour()
 	else:
-		continueBehaviour()
+		continueBehaviour(delta)
 	
 	return
 
@@ -145,7 +147,7 @@ func startNewBehaviour() -> void:
 			
 	return
 	
-func continueBehaviour() -> void:
+func continueBehaviour(delta: float) -> void:
 	
 	match _currentState:
 		State.CHASE:
@@ -163,6 +165,12 @@ func continueBehaviour() -> void:
 			direction = direction.normalized()
 			_moveX = direction.x
 			_moveZ = direction.z
+	
+	# reduce spawn duration when not in combat
+	if _isFriend && _currentState != State.CHASE && _currentState != State.ATTACK:
+		_spawnTime -= delta
+		if _spawnTime <= 0:
+			returnToPlayer()
 			
 	return
 	
@@ -187,6 +195,21 @@ func die() -> void:
 		Global.friendCreatures.erase(self)
 	else:
 		Global.enemyCreatures.erase(self)
+	Global.uiHealth.unregisterCreatureHealthBar(self)
+	queue_free()
+	return
+
+func returnToPlayer() -> void:
+	_currentState = State.DEAD
+	_moveX = 0
+	_moveZ = 0
+	
+	if Global.creatureCollection.has(_key):
+		var creatureRecord: CreatureRecord = Global.creatureCollection.get(_key)
+		creatureRecord.isSummoned = false
+		creatureRecord.currentHealth = _currentHealth
+	
+	Global.friendCreatures.erase(self)
 	Global.uiHealth.unregisterCreatureHealthBar(self)
 	queue_free()
 	return
