@@ -27,6 +27,7 @@ var _targetLocation = Vector3.ZERO
 var _movementSpeed = 8.0
 var _lerpAmount = 0.0
 var _totalDistance = 0.0
+var _setStartingAreaOfEffectRotation = 0.0
 
 func _process(delta: float) -> void:
 	_body.global_rotation = Global.camera.global_rotation * Vector3(1.0, 1.0, 1.0)
@@ -78,6 +79,10 @@ func spawn(spawnLocation: Vector3, targetLocation: Vector3) -> void:
 	_lerpAmount = 0.0
 	global_position = _spawnLocation
 	_isMovingUp = true
+	return
+
+func setStartingAreaOfEffectRotation(rotation: float):
+	_setStartingAreaOfEffectRotation = rotation
 	return
 	
 func setupCapture() -> void:
@@ -136,9 +141,7 @@ func triggerCapture() -> void:
 	if creature == null:
 		return
 	
-	var creatureRecord = CreatureRecord.new(creature.getKey(), creature.getCreatureType(), creature.getCreatureName(), creature.getLevel(), creature.getMaxHealth(), creature.getMaxHealth(), false)
-	Global.creatureCollection[creatureRecord.key] = creatureRecord
-	creature.die()
+	creature.tryCapture()
 	return
 
 func triggerSummon() -> void:
@@ -150,6 +153,7 @@ func triggerSummon() -> void:
 	Global.add_child(creature)
 	creature.global_position = Vector3(global_position.x, 0.0, global_position.z)
 	_creatureRecordToSummon.isSummoned = true
+	Global.uiCreatureCollection.updateCollection(true)
 	return
 	
 func triggerPotion() -> void:
@@ -180,6 +184,7 @@ func spawnAreaOfEffect() -> AreaOfEffect:
 	var areaOfEffect: AreaOfEffect = Global.areaOfEffectScene.instantiate()
 	Global.add_child(areaOfEffect)
 	areaOfEffect.global_position = Vector3(_targetLocation.x, 0.01, _targetLocation.z)
+	areaOfEffect.rotate(Vector3.UP, _setStartingAreaOfEffectRotation)
 	areaOfEffect.setTexture(_projectileType)
 	return areaOfEffect
 
@@ -189,7 +194,7 @@ func getNearestCreatureInRange(areaRange: float, isFriend: bool) -> Creature:
 		targets = Global.friendCreatures
 	
 	var nearestTarget = null
-	var nearestDistance = INF	
+	var nearestDistance = INF
 
 	for target in targets:
 		# Make sure the enemy is valid (not freed)

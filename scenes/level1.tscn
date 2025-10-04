@@ -1,15 +1,22 @@
-[gd_scene load_steps=13 format=3 uid="uid://7ctrgjrqpkwl"]
+[gd_scene load_steps=18 format=3 uid="uid://7ctrgjrqpkwl"]
 
 [ext_resource type="PackedScene" uid="uid://bky01l3kbljm5" path="res://scenes/player.tscn" id="1_6sh32"]
 [ext_resource type="PackedScene" uid="uid://co275n4lpsop1" path="res://scenes/slime.tscn" id="4_ejswk"]
 [ext_resource type="Script" uid="uid://jufy6c6k86fj" path="res://scripts/ui_health.gd" id="5_ru4tf"]
+[ext_resource type="Texture2D" uid="uid://c2dp66ogchyo7" path="res://sprites/slime-friend.png" id="5_u3awl"]
 [ext_resource type="Texture2D" uid="uid://ucjlptk75o3c" path="res://sprites/health-container.png" id="6_6sh32"]
 [ext_resource type="PackedScene" uid="uid://bnjn4jpty7agr" path="res://scenes/fly.tscn" id="6_conm7"]
+[ext_resource type="Script" uid="uid://dlr2xl5ep8mnt" path="res://scripts/ui_creature_collection.gd" id="6_d3jkd"]
 [ext_resource type="Texture2D" uid="uid://c852pq4sjupin" path="res://sprites/health-clip.png" id="7_ejswk"]
 [ext_resource type="Texture2D" uid="uid://bad16bvv64hm2" path="res://sprites/health-bar.png" id="8_bbk5w"]
+[ext_resource type="Texture2D" uid="uid://dvnhv6dhhwdsx" path="res://sprites/fly-friend.png" id="8_u3awl"]
 [ext_resource type="Texture2D" uid="uid://b7pq28cvwklst" path="res://sprites/health-bar-slow.png" id="9_conm7"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ru4tf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_conm7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d3jkd"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_lgp48"]
 size = Vector3(10, 0.1, 10)
@@ -24,9 +31,12 @@ ambient_light_color = Color(0.403922, 0.592157, 1, 1)
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="UIHealth" type="Control" parent="UI"]
 anchors_preset = 0
@@ -60,6 +70,134 @@ texture = ExtResource("9_conm7")
 [node name="Bar" type="Sprite2D" parent="UI/UIHealth/PanelContainer/Clip"]
 texture_filter = 1
 texture = ExtResource("8_bbk5w")
+
+[node name="UICreatureCollection" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("6_d3jkd")
+_slimeTexture = ExtResource("5_u3awl")
+_flyTexture = ExtResource("8_u3awl")
+_snekTexture = ExtResource("5_u3awl")
+_mushTexture = ExtResource("5_u3awl")
+_firnTexture = ExtResource("5_u3awl")
+_snelTexture = ExtResource("5_u3awl")
+_bigMushTexture = ExtResource("5_u3awl")
+_dinoTexture = ExtResource("5_u3awl")
+
+[node name="Progress" type="RichTextLabel" parent="UI/UICreatureCollection"]
+layout_mode = 0
+offset_left = -170.0
+offset_top = -223.0
+offset_right = -10.0
+offset_bottom = -200.0
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/bold_font_size = 16
+theme_override_font_sizes/bold_italics_font_size = 16
+theme_override_font_sizes/italics_font_size = 16
+theme_override_font_sizes/mono_font_size = 16
+text = "100.0% Completion"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="UI/UICreatureCollection"]
+layout_mode = 0
+offset_left = -170.0
+offset_top = 200.0
+offset_right = -10.0
+offset_bottom = 220.0
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/bold_font_size = 16
+theme_override_font_sizes/bold_italics_font_size = 16
+theme_override_font_sizes/italics_font_size = 16
+theme_override_font_sizes/mono_font_size = 16
+text = "Scroll to select Creature"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="UI/UICreatureCollection"]
+layout_mode = 0
+offset_left = -170.0
+offset_top = -200.0
+offset_right = -20.0
+offset_bottom = 200.0
+mouse_filter = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/UICreatureCollection/Panel"]
+layout_mode = 0
+offset_right = 158.0
+offset_bottom = 400.0
+mouse_filter = 2
+follow_focus = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/UICreatureCollection/Panel/ScrollContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="Template" type="PanelContainer" parent="UI/UICreatureCollection"]
+visible = false
+custom_minimum_size = Vector2(150, 48)
+layout_mode = 0
+offset_left = -170.0
+offset_top = -149.0
+offset_right = -20.0
+offset_bottom = -98.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_conm7")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/UICreatureCollection/Template"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="UI/UICreatureCollection/Template/HBoxContainer"]
+custom_minimum_size = Vector2(48, 40)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_d3jkd")
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/UICreatureCollection/Template/HBoxContainer/Panel"]
+texture_filter = 1
+texture = ExtResource("5_u3awl")
+offset = Vector2(24, 24)
+hframes = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/UICreatureCollection/Template/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+theme_override_font_sizes/mono_font_size = 12
+text = "Slime
+Level 1
+HP 22 / 40"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)

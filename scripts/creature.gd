@@ -1,7 +1,7 @@
 extends Living
 class_name Creature
 
-enum State { IDLE, WALK, CHASE, ATTACK, DEAD }
+enum State { IDLE, WALK, CHASE, ATTACK, DEAD, IN_CAPTURE }
 
 var _currentState = State.IDLE
 var _aggroTarget = null
@@ -13,6 +13,7 @@ var _baseIdleBehaviourTime = 2.0
 var _baseWalkBehaviourTime = 2.0
 var _baseChaseBehaviourTime = 2.0
 @export var _baseAttackBehaviourTime = 1.0
+var _baseCaptureTime = 3.0
 var _randBehaviourTime = 1.0
 
 var _key = ""
@@ -25,6 +26,10 @@ var _currentHealth = 0.0
 @export var _attackDamage = 2.0
 @export var _creatureTexture: Texture2D
 @export var _creatureFriendTexture: Texture2D
+
+@export var _capturingTexture: Texture2D
+@export var _capturedTexture: Texture2D
+var _isCaptured = false
 
 var _spawnTime = 10.0
 
@@ -75,6 +80,9 @@ func processBehaviour(delta: float) -> void:
 		return
 		
 	_behaviourTime -= delta
+	
+	countdownCapture()
+	
 	if _behaviourTime <= 0:
 		chooseNewBehaviour()
 		startNewBehaviour()
@@ -102,7 +110,12 @@ func chooseNewBehaviour() -> void:
 		State.ATTACK:
 			if randf() < 0.2:
 				newState = State.WALK
-	
+				
+		State.IN_CAPTURE:
+			if _isCaptured:
+				capture()
+				return
+				
 	var nearestTarget = getNearestTarget()
 	if nearestTarget != null:
 		newState = State.CHASE
@@ -175,15 +188,76 @@ func continueBehaviour(delta: float) -> void:
 	return
 	
 func takeDamage(damage: float) -> void:
+	if _currentState == State.DEAD or _currentState == State.IN_CAPTURE:
+		return
+		
 	_currentHealth -= damage
-	if _currentHealth < 0:
+	if _currentHealth <= 0:
 		die()
+		return
+	if _isFriend:
+		if Global.creatureCollection.has(_key):
+			var creatureRecord: CreatureRecord = Global.creatureCollection.get(_key)
+			creatureRecord.currentHealth = _currentHealth
+			Global.uiCreatureCollection.updateCollection(false)
 	return
 
 func heal(healAmount: float) -> void:
+	if _currentState == State.DEAD or _currentState == State.IN_CAPTURE:
+		return
+		
 	_currentHealth += healAmount
 	if _currentHealth > _maxHealth:
 		_currentHealth = _maxHealth
+	if _isFriend:
+		if Global.creatureCollection.has(_key):
+			var creatureRecord: CreatureRecord = Global.creatureCollection.get(_key)
+			creatureRecord.currentHealth = _currentHealth
+			Global.uiCreatureCollection.updateCollection(false)
+	return
+	
+func tryCapture() -> void:
+	if _currentState == State.DEAD or _currentState == State.IN_CAPTURE:
+		return
+	_moveX = 0
+	_moveZ = 0
+	_currentState = State.IN_CAPTURE
+	_behaviourTime = _baseCaptureTime
+	_sprite.texture = _capturingTexture
+	return
+
+func countdownCapture() -> void:
+	if _currentState != State.IN_CAPTURE or _behaviourTime > 1.0:
+		return
+	if _isCaptured:
+		if _behaviourTime < 0.1:
+			capture()
+		return
+		
+	var healthPercentage = getHealth() / getMaxHealth()
+	var captureChance = clamp(1.05 - healthPercentage, 0.0, 1.0)
+	
+	print("chance to capture ", captureChance)
+	
+	if randf() < captureChance:
+		_isCaptured = true
+		_sprite.texture = _capturedTexture
+	else:
+		release()
+	return
+
+func capture() -> void:
+	print("captured")
+	var creatureRecord = CreatureRecord.new(getKey(), getCreatureType(), getCreatureName(), getLevel(), getMaxHealth(), getMaxHealth(), false)
+	Global.creatureCollection[creatureRecord.key] = creatureRecord
+	Global.uiCreatureCollection.updateCollection(true)
+	die()
+	return
+
+func release() -> void:
+	_currentState = State.IDLE
+	_behaviourTime = 0.0
+	_sprite.texture = _creatureTexture
 	return
 	
 func die() -> void:
@@ -193,6 +267,9 @@ func die() -> void:
 	_moveZ = 0
 	if _isFriend:
 		Global.friendCreatures.erase(self)
+		if Global.creatureCollection.has(_key):
+			Global.creatureCollection.erase(_key)
+			Global.uiCreatureCollection.updateCollection(true)
 	else:
 		Global.enemyCreatures.erase(self)
 	Global.uiHealth.unregisterCreatureHealthBar(self)
@@ -200,6 +277,10 @@ func die() -> void:
 	return
 
 func returnToPlayer() -> void:
+	if _currentHealth < 0:
+		die()
+		return
+		
 	_currentState = State.DEAD
 	_moveX = 0
 	_moveZ = 0
@@ -208,6 +289,7 @@ func returnToPlayer() -> void:
 		var creatureRecord: CreatureRecord = Global.creatureCollection.get(_key)
 		creatureRecord.isSummoned = false
 		creatureRecord.currentHealth = _currentHealth
+		Global.uiCreatureCollection.updateCollection(true)
 	
 	Global.friendCreatures.erase(self)
 	Global.uiHealth.unregisterCreatureHealthBar(self)

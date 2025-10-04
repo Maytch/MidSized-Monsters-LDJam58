@@ -15,6 +15,7 @@ var _summonCooldown = 0.0
 var _maxSummonCooldown = 5.0
 
 var _selectedCreatureToSummon: CreatureRecord = null
+var _selectedCreatureIndex = 0
 
 func _ready() -> void:
 	super()
@@ -23,6 +24,7 @@ func _ready() -> void:
 	
 	_selectedCreatureToSummon = CreatureRecord.new("creature_1", Global.CreatureType.SLIME, "Slime", 1, 50.0, 50.0, false)
 	Global.creatureCollection["creature_1"] = _selectedCreatureToSummon
+	Global.uiCreatureCollection.updateCollection(true)
 	return
 
 func _process(delta: float) -> void:
@@ -54,6 +56,22 @@ func processPlayerInput() -> void:
 	if Input.is_action_just_pressed("select_summon_action"):
 		_currentAction = PlayerAction.SUMMON
 		_areaOfEffect.setTexture(Global.AreaType.SUMMON)
+		
+	if Input.is_action_just_pressed("select_summon_down"):
+		if _selectedCreatureIndex + 1 >= Global.creatureCollection.size():
+			_selectedCreatureIndex = 0
+			Global.uiCreatureCollection.updateScrollToSelected(_selectedCreatureIndex)
+		else:
+			_selectedCreatureIndex += 1
+			Global.uiCreatureCollection.updateScrollToSelected(_selectedCreatureIndex)
+	
+	if Input.is_action_just_pressed("select_summon_up"):
+		if _selectedCreatureIndex - 1 < 0:
+			_selectedCreatureIndex = Global.creatureCollection.size() - 1
+			Global.uiCreatureCollection.updateScrollToSelected(_selectedCreatureIndex)
+		else:
+			_selectedCreatureIndex -= 1
+			Global.uiCreatureCollection.updateScrollToSelected(_selectedCreatureIndex)
 		
 	if Input.is_action_just_pressed("select_area"):
 		match _currentAction:
@@ -107,13 +125,20 @@ func throwSummon() -> void:
 		Global.showError("No creature selected to summon!")
 		return
 	
-	for creatureRecord: CreatureRecord in Global.creatureCollection.values():
-		if creatureRecord.isSummoned:
-			continue
+	var results = Global.getCreatureRecordFromIndex(_selectedCreatureIndex)
+	var creatureRecord: CreatureRecord = results[0]
+	_selectedCreatureIndex = results[1]
+	Global.uiCreatureCollection.updateScrollToSelected(_selectedCreatureIndex)
+	if creatureRecord == null:
+		Global.showError("No creature found!")
+		return
+		
+	if creatureRecord.isSummoned:
+		Global.showError("Creature already summoned!")
+		return
 			
-		var projectile = spawnProjectile()
-		projectile.setupSummon(creatureRecord)
-		break
+	var projectile = spawnProjectile()
+	projectile.setupSummon(creatureRecord)
 		
 	_summonCooldown = _maxSummonCooldown
 	return
@@ -175,5 +200,6 @@ func spawnProjectile() -> Projectile:
 	spawnLocation = Vector3(spawnLocation.x, 0.5, spawnLocation.z)
 	
 	projectile.spawn(spawnLocation, targetPosition)
+	projectile.setStartingAreaOfEffectRotation(_areaOfEffect.rotation.y)
 	
 	return projectile

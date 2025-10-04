@@ -3,6 +3,7 @@ extends Node
 var player
 var camera
 var uiHealth: UIHealth
+var uiCreatureCollection: UICreatureCollection
 
 var enemyCreatures: Array = []
 var friendCreatures: Array = []
@@ -55,7 +56,15 @@ func spawnCreature(creatureType: CreatureType) -> Creature:
 		
 	return object
 	
-	
+func getCreatureRecordFromIndex(index: int) -> Array:
+	var i = 0
+	for creatureRecord: CreatureRecord in creatureCollection.values():
+		if i == index:
+			return [creatureRecord, index]
+		if i == creatureCollection.size() - 1:
+			return [creatureRecord, i]
+		i += 1
+	return [null, 0]
 	
 	
 	
