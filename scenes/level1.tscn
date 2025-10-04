@@ -1,11 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://7ctrgjrqpkwl"]
+[gd_scene load_steps=11 format=3 uid="uid://7ctrgjrqpkwl"]
 
-[ext_resource type="Script" uid="uid://d03xlu343tmde" path="res://player.gd" id="1_dopym"]
-[ext_resource type="Texture2D" uid="uid://ceyfsa1rhpru" path="res://player.png" id="1_jwv3a"]
-[ext_resource type="Texture2D" uid="uid://ch237jqnb8eos" path="res://slime.png" id="3_ootpb"]
-[ext_resource type="Script" uid="uid://m7f3hnbgsepk" path="res://creature.gd" id="3_v38iq"]
-[ext_resource type="Texture2D" uid="uid://c2dp66ogchyo7" path="res://slime-friend.png" id="5_crycw"]
-[ext_resource type="Texture2D" uid="uid://d3chblv1cc367" path="res://fly.png" id="5_v8kj3"]
+[ext_resource type="Script" uid="uid://d03xlu343tmde" path="res://scripts/player.gd" id="1_ejswk"]
+[ext_resource type="Texture2D" uid="uid://ceyfsa1rhpru" path="res://sprites/player.png" id="2_bbk5w"]
+[ext_resource type="Script" uid="uid://m7f3hnbgsepk" path="res://scripts/creature.gd" id="3_conm7"]
+[ext_resource type="Texture2D" uid="uid://ch237jqnb8eos" path="res://sprites/slime.png" id="4_d3jkd"]
+[ext_resource type="Texture2D" uid="uid://c2dp66ogchyo7" path="res://sprites/slime-friend.png" id="5_u3awl"]
+[ext_resource type="Texture2D" uid="uid://d3chblv1cc367" path="res://sprites/fly.png" id="6_2ku1j"]
+[ext_resource type="PackedScene" uid="uid://b1fvheoq5ueh1" path="res://scenes/area_of_effect.tscn" id="7_f31uk"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_lgp48"]
 size = Vector3(10, 0.1, 10)
@@ -23,7 +24,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 mesh = SubResource("BoxMesh_lgp48")
 
 [node name="Player" type="Node3D" parent="."]
-script = ExtResource("1_dopym")
+script = ExtResource("1_ejswk")
 
 [node name="Body" type="Node3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.15484e-05, 0)
@@ -33,15 +34,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24030928, 0)
 shaded = true
 alpha_cut = 2
 texture_filter = 2
-texture = ExtResource("1_jwv3a")
+texture = ExtResource("2_bbk5w")
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 0.699115, 0.71501, 0, -0.71501, 0.699115, 0, 2.03141, 1.76424)
 fov = 65.0
 
+[node name="AreaOfEffect" parent="Player" instance=ExtResource("7_f31uk")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.946, 0.001, 0.83)
+
 [node name="Slime" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2902969, 0, 0)
-script = ExtResource("3_v38iq")
+script = ExtResource("3_conm7")
+_maxHealth = 50.0
+_attackDamage = 10.0
 _movementSpeed = 0.5
 
 [node name="Body" type="Node3D" parent="Slime"]
@@ -51,16 +57,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24, 0)
 shaded = true
 alpha_cut = 2
 texture_filter = 2
-texture = ExtResource("3_ootpb")
+texture = ExtResource("4_d3jkd")
 hframes = 2
 
 [node name="SlimeFriend" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1764108, 0, -1.2645233)
-script = ExtResource("3_v38iq")
+script = ExtResource("3_conm7")
 _isFriend = true
 _level = 2.0
-_maxHealth = 12.0
-_attackDamage = 2.5
+_maxHealth = 60.0
+_attackDamage = 6.0
 _movementSpeed = 0.5
 
 [node name="Body" type="Node3D" parent="SlimeFriend"]
@@ -70,12 +76,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24, 0)
 shaded = true
 alpha_cut = 2
 texture_filter = 2
-texture = ExtResource("5_crycw")
+texture = ExtResource("5_u3awl")
 hframes = 2
 
 [node name="Fly" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0069091, 0, 0.30009627)
-script = ExtResource("3_v38iq")
+script = ExtResource("3_conm7")
+_maxHealth = 40.0
+_attackDamage = 4.0
 _movementSpeed = 0.5
 _maxBounceLeft = 0.1
 _bounceSpeed = 2
@@ -88,7 +96,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24, 0)
 shaded = true
 alpha_cut = 2
 texture_filter = 2
-texture = ExtResource("5_v8kj3")
+texture = ExtResource("6_2ku1j")
 hframes = 2
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

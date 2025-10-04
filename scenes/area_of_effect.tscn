@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1fvheoq5ueh1"]
+
+[ext_resource type="Texture2D" uid="uid://ceyfsa1rhpru" path="res://sprites/player.png" id="1_plpw6"]
+[ext_resource type="Script" uid="uid://cbg18uoyev6ew" path="res://scripts/area_of_effect.gd" id="2_ca03r"]
+
+[node name="AreaOfEffect" type="Sprite3D"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+texture = ExtResource("1_plpw6")
+script = ExtResource("2_ca03r")

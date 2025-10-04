@@ -63,12 +63,15 @@ func chooseNewBehaviour() -> void:
 		State.IDLE:
 			if randf() < 0.6:
 				newState = State.WALK
+				
 		State.WALK:
 			if randf() < 0.4:
 				newState = State.WALK
+				
 		State.CHASE:
 			if randf() < 0.2:
 				newState = State.WALK
+				
 		State.ATTACK:
 			if randf() < 0.2:
 				newState = State.WALK
@@ -92,6 +95,7 @@ func startNewBehaviour() -> void:
 			_behaviourTime = _baseIdleBehaviourTime + randf_range(-_randBehaviourTime, _randBehaviourTime)
 			_moveX = 0
 			_moveZ = 0
+			
 		State.WALK:
 			var angle = randf() * TAU # 2pi
 			var direction = Vector3(cos(angle), 0, sin(angle))
@@ -99,13 +103,14 @@ func startNewBehaviour() -> void:
 			_moveX = direction.x
 			_moveZ = direction.z
 			_behaviourTime = _baseWalkBehaviourTime + randf_range(-_randBehaviourTime, _randBehaviourTime)
-			print(direction)
+
 		State.CHASE:
 			var direction = global_position.direction_to(_aggroTarget.global_position)
 			direction = direction.normalized()
 			_moveX = direction.x
 			_moveZ = direction.z
 			_behaviourTime = _baseChaseBehaviourTime + randf_range(-_randBehaviourTime, _randBehaviourTime)
+			
 		State.ATTACK:
 			_behaviourTime = _baseAttackBehaviourTime
 			_moveX = 0
