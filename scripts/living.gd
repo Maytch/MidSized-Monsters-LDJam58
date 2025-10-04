@@ -18,10 +18,16 @@ var _isBouncingLeft = true
 @export var _bodyAnimationSpeed = 2.0
 var _currentBodyFrameTime = 0.0
 
+var _hasSpawned = false
+
 func _ready() -> void:
+	_hasSpawned = true
 	return
 
 func _process(delta: float) -> void:
+	if !_hasSpawned:
+		return
+		
 	_body.global_rotation = Global.camera.global_rotation * Vector3(1.0, 1.0, 1.0)
 	processMovementBounce(delta)
 	processBodyAnimation(delta)
@@ -29,6 +35,9 @@ func _process(delta: float) -> void:
 	return
 
 func _physics_process(delta: float) -> void:
+	if !_hasSpawned:
+		return
+		
 	move(delta)
 	
 	return

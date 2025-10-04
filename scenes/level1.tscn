@@ -1,9 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://7ctrgjrqpkwl"]
+[gd_scene load_steps=13 format=3 uid="uid://7ctrgjrqpkwl"]
 
 [ext_resource type="PackedScene" uid="uid://bky01l3kbljm5" path="res://scenes/player.tscn" id="1_6sh32"]
 [ext_resource type="PackedScene" uid="uid://co275n4lpsop1" path="res://scenes/slime.tscn" id="4_ejswk"]
-[ext_resource type="PackedScene" uid="uid://beqdk2etqoq46" path="res://scenes/slime_friend.tscn" id="5_bbk5w"]
+[ext_resource type="Script" uid="uid://jufy6c6k86fj" path="res://scripts/ui_health.gd" id="5_ru4tf"]
+[ext_resource type="Texture2D" uid="uid://ucjlptk75o3c" path="res://sprites/health-container.png" id="6_6sh32"]
 [ext_resource type="PackedScene" uid="uid://bnjn4jpty7agr" path="res://scenes/fly.tscn" id="6_conm7"]
+[ext_resource type="Texture2D" uid="uid://c852pq4sjupin" path="res://sprites/health-clip.png" id="7_ejswk"]
+[ext_resource type="Texture2D" uid="uid://bad16bvv64hm2" path="res://sprites/health-bar.png" id="8_bbk5w"]
+[ext_resource type="Texture2D" uid="uid://b7pq28cvwklst" path="res://sprites/health-bar-slow.png" id="9_conm7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ru4tf"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_lgp48"]
 size = Vector3(10, 0.1, 10)
@@ -16,6 +22,44 @@ ambient_light_color = Color(0.403922, 0.592157, 1, 1)
 
 [node name="Level1" type="Node3D"]
 
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="UIHealth" type="Control" parent="UI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("5_ru4tf")
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/UIHealth"]
+custom_minimum_size = Vector2(40, 4)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 8.0
+scale = Vector2(2, 2)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ru4tf")
+
+[node name="Container" type="Sprite2D" parent="UI/UIHealth/PanelContainer"]
+texture_filter = 1
+texture = ExtResource("6_6sh32")
+
+[node name="Clip" type="Sprite2D" parent="UI/UIHealth/PanelContainer"]
+clip_children = 1
+texture_filter = 1
+texture = ExtResource("7_ejswk")
+
+[node name="SlowBar" type="Sprite2D" parent="UI/UIHealth/PanelContainer/Clip"]
+texture_filter = 1
+texture = ExtResource("9_conm7")
+
+[node name="Bar" type="Sprite2D" parent="UI/UIHealth/PanelContainer/Clip"]
+texture_filter = 1
+texture = ExtResource("8_bbk5w")
+
 [node name="Floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 mesh = SubResource("BoxMesh_lgp48")
@@ -25,8 +69,9 @@ mesh = SubResource("BoxMesh_lgp48")
 [node name="Slime" parent="." instance=ExtResource("4_ejswk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2902969, 0, 0)
 
-[node name="SlimeFriend" parent="." instance=ExtResource("5_bbk5w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1764108, 0, -1.2645233)
+[node name="Slime2" parent="." instance=ExtResource("4_ejswk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20525527, 0, -1.6455464)
+_isFriend = true
 
 [node name="Fly" parent="." instance=ExtResource("6_conm7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0069091, 0, 0.30009627)

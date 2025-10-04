@@ -15,13 +15,19 @@ var _baseChaseBehaviourTime = 2.0
 @export var _baseAttackBehaviourTime = 1.0
 var _randBehaviourTime = 1.0
 
+var _key = ""
+@export var _creatureType = Global.CreatureType.SLIME
+@export var _creatureName = ""
 @export var _isFriend = false
-@export var _level = 1.0
+@export var _level = 1
 @export var _maxHealth = 10.0
 var _currentHealth = _maxHealth
 @export var _attackDamage = 2.0
+@export var _creatureTexture: Texture2D
+@export var _creatureFriendTexture: Texture2D
 
 func _ready() -> void:
+	super()
 	_movementSpeed *= randf_range(0.9, 1.1)
 	_currentHealth = _maxHealth
 	
@@ -29,6 +35,16 @@ func _ready() -> void:
 		Global.friendCreatures.append(self)
 	else:
 		Global.enemyCreatures.append(self)
+		
+	Global.uiHealth.registerCreatureHealthBar(self)
+	
+	if _isFriend:
+		_sprite.texture = _creatureFriendTexture
+	else:
+		_sprite.texture = _creatureTexture
+		
+	if _key == "":
+		_key = "creature_" + str(get_instance_id())
 	return
 
 func _process(delta: float) -> void:
@@ -40,6 +56,15 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	super(delta)
 	
+	return
+
+func setup(creatureRecord: CreatureRecord):
+	_key = creatureRecord.key
+	
+	_isFriend = true
+	
+	_currentHealth = creatureRecord.currentHealth
+	_maxHealth = creatureRecord.maxHealth
 	return
 
 func processBehaviour(delta: float) -> void:
@@ -146,6 +171,12 @@ func takeDamage(damage: float) -> void:
 	if _currentHealth < 0:
 		die()
 	return
+
+func heal(healAmount: float) -> void:
+	_currentHealth += healAmount
+	if _currentHealth > _maxHealth:
+		_currentHealth = _maxHealth
+	return
 	
 func die() -> void:
 	_currentHealth = 0
@@ -156,11 +187,30 @@ func die() -> void:
 		Global.friendCreatures.erase(self)
 	else:
 		Global.enemyCreatures.erase(self)
+	Global.uiHealth.unregisterCreatureHealthBar(self)
 	queue_free()
 	return
 	
 func isDead() -> bool:
 	return _currentState == State.DEAD
+	
+func getHealth() -> float:
+	return _currentHealth
+	
+func getMaxHealth() -> float:
+	return _maxHealth
+	
+func getLevel() -> int:
+	return _level
+
+func getCreatureName() -> String:
+	return _creatureName
+	
+func getKey() -> String:
+	return _key
+	
+func getCreatureType() -> Global.CreatureType:
+	return _creatureType
 	
 func getNearestTarget() -> Creature:
 	var targets = Global.enemyCreatures

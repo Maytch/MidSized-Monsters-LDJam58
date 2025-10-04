@@ -6,7 +6,6 @@
 [node name="SlimeFriend" type="Node3D"]
 script = ExtResource("1_ovstr")
 _isFriend = true
-_level = 2.0
 _maxHealth = 60.0
 _attackDamage = 6.0
 _movementSpeed = 0.5

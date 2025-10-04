@@ -12,7 +12,7 @@ class_name Projectile
 
 var _projectileType = Global.AreaType.CAPTURE
 var _healAmount = 0.0
-var _creatureToSummon: Creature = null
+var _creatureRecordToSummon: CreatureRecord = null
 var _damageAmount = 0.0
 
 var _areaOfEffect: AreaOfEffect = null
@@ -86,9 +86,9 @@ func setupCapture() -> void:
 	_areaOfEffect = spawnAreaOfEffect()
 	return
 
-func setupSummon(creature: Creature) -> void:
+func setupSummon(creatureRecord: CreatureRecord) -> void:
 	_projectileType = Global.AreaType.SUMMON
-	_creatureToSummon = creature
+	_creatureRecordToSummon = creatureRecord
 	_sprite.texture = _summonTexture
 	_areaOfEffect = spawnAreaOfEffect()
 	return
@@ -115,8 +115,65 @@ func setupAttackFriend(damageAmount: float) -> void:
 	return
 	
 func triggerLanding() ->  void:
+	match _projectileType:
+		Global.AreaType.CAPTURE:
+			triggerCapture()
+		Global.AreaType.SUMMON:
+			triggerSummon()
+		Global.AreaType.POTION:
+			triggerPotion()
+		Global.AreaType.ATTACK:
+			triggerAttack()
+		Global.AreaType.ATTACK_FRIEND:
+			triggerAttackFriend()
+			
 	_areaOfEffect.queue_free()
 	queue_free()
+	return
+	
+func triggerCapture() -> void:
+	var creature = getNearestCreatureInRange(1.0, false)
+	if creature == null:
+		return
+	
+	var creatureRecord = CreatureRecord.new(creature.getKey(), creature.getCreatureType(), creature.getCreatureName(), creature.getLevel(), creature.getMaxHealth(), creature.getMaxHealth(), false)
+	Global.creatureCollection[creatureRecord.key] = creatureRecord
+	creature.die()
+	return
+
+func triggerSummon() -> void:
+	if _creatureRecordToSummon == null:
+		return
+		
+	var creature: Creature = Global.spawnCreature(_creatureRecordToSummon.creatureType)
+	creature.setup(_creatureRecordToSummon)
+	Global.add_child(creature)
+	creature.global_position = Vector3(global_position.x, 0.0, global_position.z)
+	_creatureRecordToSummon.isSummoned = true
+	return
+	
+func triggerPotion() -> void:
+	var creatures = getCreaturesInRange(1.5, true)
+	 
+	for i in range(creatures.size()):
+		var creature: Creature = creatures[i]
+		creature.heal(_healAmount)
+	return
+
+func triggerAttack() -> void:
+	var creatures = getCreaturesInRange(0.75, true)
+	 
+	for i in range(creatures.size()):
+		var creature: Creature = creatures[i]
+		creature.takeDamage(_damageAmount)
+	return
+
+func triggerAttackFriend() -> void:
+	var creatures = getCreaturesInRange(0.75, false)
+	 
+	for i in range(creatures.size()):
+		var creature: Creature = creatures[i]
+		creature.takeDamage(_damageAmount)
 	return
 
 func spawnAreaOfEffect() -> AreaOfEffect:
@@ -125,3 +182,37 @@ func spawnAreaOfEffect() -> AreaOfEffect:
 	areaOfEffect.global_position = Vector3(_targetLocation.x, 0.01, _targetLocation.z)
 	areaOfEffect.setTexture(_projectileType)
 	return areaOfEffect
+
+func getNearestCreatureInRange(areaRange: float, isFriend: bool) -> Creature:
+	var targets = Global.enemyCreatures
+	if isFriend:
+		targets = Global.friendCreatures
+	
+	var nearestTarget = null
+	var nearestDistance = INF	
+
+	for target in targets:
+		# Make sure the enemy is valid (not freed)
+		if is_instance_valid(target):
+			var dist = global_position.distance_to(target.global_position)
+			if dist < nearestDistance && dist < areaRange:
+				nearestDistance = dist
+				nearestTarget = target
+		
+	return nearestTarget
+
+func getCreaturesInRange(areaRange: float, isFriend: bool) -> Array:
+	var creatures: Array = []
+	
+	var targets = Global.enemyCreatures
+	if isFriend:
+		targets = Global.friendCreatures
+
+	for target in targets:
+		# Make sure the enemy is valid (not freed)
+		if is_instance_valid(target):
+			var dist = global_position.distance_to(target.global_position)
+			if dist < areaRange:
+				creatures.append(target)
+		
+	return creatures

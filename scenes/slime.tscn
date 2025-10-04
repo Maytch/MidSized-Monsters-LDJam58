@@ -1,12 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://co275n4lpsop1"]
+[gd_scene load_steps=4 format=3 uid="uid://co275n4lpsop1"]
 
 [ext_resource type="Script" uid="uid://m7f3hnbgsepk" path="res://scripts/creature.gd" id="1_p2gj0"]
 [ext_resource type="Texture2D" uid="uid://ch237jqnb8eos" path="res://sprites/slime.png" id="2_n6pvg"]
+[ext_resource type="Texture2D" uid="uid://c2dp66ogchyo7" path="res://sprites/slime-friend.png" id="3_n6pvg"]
 
 [node name="Slime" type="Node3D"]
 script = ExtResource("1_p2gj0")
+_creatureName = "Slime"
 _maxHealth = 50.0
 _attackDamage = 10.0
+_creatureTexture = ExtResource("2_n6pvg")
+_creatureFriendTexture = ExtResource("3_n6pvg")
 _movementSpeed = 0.5
 
 [node name="Body" type="Node3D" parent="."]
