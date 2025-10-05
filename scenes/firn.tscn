@@ -9,11 +9,11 @@
 
 [node name="Firn" type="Node3D"]
 script = ExtResource("1_fj8vs")
+_baseAttackBehaviourTime = 0.25
 _creatureType = 4
 _creatureName = "Firn"
 _level = 5
-_maxHealth = 100.0
-_attackDamage = 8.0
+_maxHealth = 120.0
 _creatureTexture = ExtResource("2_fj8vs")
 _creatureFriendTexture = ExtResource("3_ccgbc")
 _capturingTexture = ExtResource("4_0mb07")

@@ -10,7 +10,7 @@
 script = ExtResource("1_p2gj0")
 _creatureName = "Slime"
 _maxHealth = 50.0
-_attackDamage = 10.0
+_attackDamage = 5.0
 _creatureTexture = ExtResource("2_n6pvg")
 _creatureFriendTexture = ExtResource("3_n6pvg")
 _capturingTexture = ExtResource("4_2npkn")
