@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://7ctrgjrqpkwl"]
+[gd_scene load_steps=27 format=3 uid="uid://7ctrgjrqpkwl"]
 
 [ext_resource type="PackedScene" uid="uid://bky01l3kbljm5" path="res://scenes/player.tscn" id="1_6sh32"]
 [ext_resource type="PackedScene" uid="uid://co275n4lpsop1" path="res://scenes/slime.tscn" id="4_ejswk"]
@@ -10,13 +10,33 @@
 [ext_resource type="Texture2D" uid="uid://c852pq4sjupin" path="res://sprites/health-clip.png" id="7_ejswk"]
 [ext_resource type="Texture2D" uid="uid://bad16bvv64hm2" path="res://sprites/health-bar.png" id="8_bbk5w"]
 [ext_resource type="Texture2D" uid="uid://dvnhv6dhhwdsx" path="res://sprites/fly-friend.png" id="8_u3awl"]
+[ext_resource type="Script" uid="uid://bliw136owchrm" path="res://scripts/ui_error.gd" id="9_2ku1j"]
 [ext_resource type="Texture2D" uid="uid://b7pq28cvwklst" path="res://sprites/health-bar-slow.png" id="9_conm7"]
+[ext_resource type="Script" uid="uid://bdv5g18c78bqw" path="res://scripts/ui_hotkeys.gd" id="10_f31uk"]
+[ext_resource type="Texture2D" uid="uid://u82yks32qw5r" path="res://sprites/capture-success.png" id="11_gnai3"]
+[ext_resource type="Texture2D" uid="uid://budohfj7443ya" path="res://sprites/capture.png" id="12_i8kv5"]
+[ext_resource type="Texture2D" uid="uid://bgdywiw2vvaih" path="res://sprites/potion.png" id="13_dxn3v"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ru4tf"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_conm7"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d3jkd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f31uk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gnai3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gnai3"]
+bg_color = Color(0, 0, 0, 0.79607844)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dxn3v"]
+bg_color = Color(0.63529414, 0.38039216, 0.20392157, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_lgp48"]
 size = Vector3(10, 0.1, 10)
@@ -198,6 +218,243 @@ HP 22 / 40"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
+
+[node name="UIError" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+script = ExtResource("9_2ku1j")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/UIError"]
+layout_mode = 0
+offset_left = -200.0
+offset_top = 10.0
+offset_right = 200.0
+offset_bottom = 44.0
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.28397802, 0.52924424, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+text = "100.0% Completion"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UIHotkeys" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("10_f31uk")
+
+[node name="Panel" type="Panel" parent="UI/UIHotkeys"]
+layout_mode = 0
+offset_left = -104.0
+offset_top = -74.0
+offset_right = 104.0
+offset_bottom = -10.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_f31uk")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/UIHotkeys/Panel"]
+layout_mode = 0
+offset_right = 208.0
+offset_bottom = 66.0
+theme_override_constants/separation = 8
+
+[node name="Summon" type="PanelContainer" parent="UI/UIHotkeys/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/UIHotkeys/Panel/HBoxContainer/Summon"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/UIHotkeys/Panel/HBoxContainer/Summon/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+theme_override_font_sizes/mono_font_size = 12
+text = "Summon"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="UI/UIHotkeys/Panel/HBoxContainer/Summon/VBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_gnai3")
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/UIHotkeys/Panel/HBoxContainer/Summon/VBoxContainer/Panel"]
+texture_filter = 1
+position = Vector2(32, 12)
+texture = ExtResource("11_gnai3")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/UIHotkeys/Panel/HBoxContainer/Summon/VBoxContainer"]
+layout_mode = 2
+
+[node name="Key" type="RichTextLabel" parent="UI/UIHotkeys/Panel/HBoxContainer/Summon/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+theme_override_font_sizes/mono_font_size = 12
+text = " []"
+fit_content = true
+
+[node name="Quantity" type="RichTextLabel" parent="UI/UIHotkeys/Panel/HBoxContainer/Summon/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+theme_override_font_sizes/mono_font_size = 12
+fit_content = true
+horizontal_alignment = 2
+
+[node name="Cooldown" type="PanelContainer" parent="UI/UIHotkeys/Panel/HBoxContainer/Summon"]
+custom_minimum_size = Vector2(0, 66)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_gnai3")
+
+[node name="Capture" type="PanelContainer" parent="UI/UIHotkeys/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/UIHotkeys/Panel/HBoxContainer/Capture"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/UIHotkeys/Panel/HBoxContainer/Capture/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+theme_override_font_sizes/mono_font_size = 12
+text = "Capture"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="UI/UIHotkeys/Panel/HBoxContainer/Capture/VBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_gnai3")
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/UIHotkeys/Panel/HBoxContainer/Capture/VBoxContainer/Panel"]
+texture_filter = 1
+position = Vector2(32, 12)
+texture = ExtResource("12_i8kv5")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/UIHotkeys/Panel/HBoxContainer/Capture/VBoxContainer"]
+layout_mode = 2
+
+[node name="Key" type="RichTextLabel" parent="UI/UIHotkeys/Panel/HBoxContainer/Capture/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+theme_override_font_sizes/mono_font_size = 12
+text = " []"
+fit_content = true
+
+[node name="Quantity" type="RichTextLabel" parent="UI/UIHotkeys/Panel/HBoxContainer/Capture/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+theme_override_font_sizes/mono_font_size = 12
+text = "x0 "
+fit_content = true
+horizontal_alignment = 2
+
+[node name="Cooldown" type="PanelContainer" parent="UI/UIHotkeys/Panel/HBoxContainer/Capture"]
+custom_minimum_size = Vector2(0, 66)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_gnai3")
+
+[node name="Potion" type="PanelContainer" parent="UI/UIHotkeys/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dxn3v")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/UIHotkeys/Panel/HBoxContainer/Potion"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/UIHotkeys/Panel/HBoxContainer/Potion/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+theme_override_font_sizes/mono_font_size = 12
+text = "Potion"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="UI/UIHotkeys/Panel/HBoxContainer/Potion/VBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_gnai3")
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/UIHotkeys/Panel/HBoxContainer/Potion/VBoxContainer/Panel"]
+texture_filter = 1
+position = Vector2(32, 12)
+texture = ExtResource("13_dxn3v")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/UIHotkeys/Panel/HBoxContainer/Potion/VBoxContainer"]
+layout_mode = 2
+
+[node name="Key" type="RichTextLabel" parent="UI/UIHotkeys/Panel/HBoxContainer/Potion/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+theme_override_font_sizes/mono_font_size = 12
+text = " []"
+fit_content = true
+
+[node name="Quantity" type="RichTextLabel" parent="UI/UIHotkeys/Panel/HBoxContainer/Potion/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+theme_override_font_sizes/mono_font_size = 12
+text = "x0 "
+fit_content = true
+horizontal_alignment = 2
+
+[node name="Cooldown" type="PanelContainer" parent="UI/UIHotkeys/Panel/HBoxContainer/Potion"]
+custom_minimum_size = Vector2(0, 66)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_gnai3")
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)

@@ -4,6 +4,8 @@ var player
 var camera
 var uiHealth: UIHealth
 var uiCreatureCollection: UICreatureCollection
+var uiError: UIError
+var uiHotkeys: UIHotkeys
 
 var enemyCreatures: Array = []
 var friendCreatures: Array = []
@@ -29,10 +31,6 @@ var firnScene = preload("res://scenes/fly.tscn")
 var snelScene = preload("res://scenes/fly.tscn")
 var bigMushScene = preload("res://scenes/fly.tscn")
 var dinoScene = preload("res://scenes/fly.tscn")
-
-func showError(text: String) -> void:
-	print(text)
-	return
 
 func spawnCreature(creatureType: CreatureType) -> Creature:
 	var object = null

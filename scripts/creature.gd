@@ -235,7 +235,7 @@ func countdownCapture() -> void:
 		return
 		
 	var healthPercentage = getHealth() / getMaxHealth()
-	var captureChance = clamp(1.05 - healthPercentage, 0.0, 1.0)
+	var captureChance = clamp(1.15 - healthPercentage, 0.0, 1.0)
 	
 	print("chance to capture ", captureChance)
 	
