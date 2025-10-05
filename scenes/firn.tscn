@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://tyuq1jj7ulyw"]
+
+[ext_resource type="Script" uid="uid://m7f3hnbgsepk" path="res://scripts/creature.gd" id="1_fj8vs"]
+[ext_resource type="Texture2D" uid="uid://f3l6b3kl05cs" path="res://sprites/firn.png" id="2_fj8vs"]
+[ext_resource type="Texture2D" uid="uid://bd8yw7qvk7s12" path="res://sprites/firn-friend.png" id="3_ccgbc"]
+[ext_resource type="Texture2D" uid="uid://cy6bnj1847xmi" path="res://sprites/capturing-anim.png" id="4_0mb07"]
+[ext_resource type="Texture2D" uid="uid://bab7owslqjcyx" path="res://sprites/captured-anim.png" id="5_qus1v"]
+[ext_resource type="Texture2D" uid="uid://ch237jqnb8eos" path="res://sprites/slime.png" id="6_ll4d7"]
+
+[node name="Firn" type="Node3D"]
+script = ExtResource("1_fj8vs")
+_creatureType = 4
+_creatureName = "Firn"
+_level = 5
+_maxHealth = 100.0
+_attackDamage = 8.0
+_creatureTexture = ExtResource("2_fj8vs")
+_creatureFriendTexture = ExtResource("3_ccgbc")
+_capturingTexture = ExtResource("4_0mb07")
+_capturedTexture = ExtResource("5_qus1v")
+_movementSpeed = 0.0
+
+[node name="Body" type="Node3D" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24, 0)
+shaded = true
+alpha_cut = 2
+texture_filter = 2
+texture = ExtResource("6_ll4d7")
+hframes = 2

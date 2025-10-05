@@ -31,6 +31,8 @@ var _currentHealth = 0.0
 @export var _capturedTexture: Texture2D
 var _isCaptured = false
 
+@export var _canFlip = false
+
 var _spawnTime = 10.0
 
 func _ready() -> void:
@@ -58,6 +60,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	super(delta)
 	processBehaviour(delta)
+	if _canFlip:
+		if _moveX > 0 and !_sprite.flip_h:
+			_sprite.flip_h = true
+		elif _moveX <= 0 and _sprite.flip_h:
+			_sprite.flip_h = false
 	
 	return
 

@@ -1,11 +1,11 @@
-[gd_scene load_steps=27 format=3 uid="uid://7ctrgjrqpkwl"]
+[gd_scene load_steps=33 format=3 uid="uid://7ctrgjrqpkwl"]
 
 [ext_resource type="PackedScene" uid="uid://bky01l3kbljm5" path="res://scenes/player.tscn" id="1_6sh32"]
-[ext_resource type="PackedScene" uid="uid://co275n4lpsop1" path="res://scenes/slime.tscn" id="4_ejswk"]
+[ext_resource type="Script" uid="uid://bb1ocfsmf3msl" path="res://scripts/level_generator.gd" id="1_14jow"]
+[ext_resource type="PackedScene" uid="uid://c8xhfkd3fv2wb" path="res://scenes/area_patch_grass.tscn" id="2_mvsps"]
 [ext_resource type="Script" uid="uid://jufy6c6k86fj" path="res://scripts/ui_health.gd" id="5_ru4tf"]
 [ext_resource type="Texture2D" uid="uid://c2dp66ogchyo7" path="res://sprites/slime-friend.png" id="5_u3awl"]
 [ext_resource type="Texture2D" uid="uid://ucjlptk75o3c" path="res://sprites/health-container.png" id="6_6sh32"]
-[ext_resource type="PackedScene" uid="uid://bnjn4jpty7agr" path="res://scenes/fly.tscn" id="6_conm7"]
 [ext_resource type="Script" uid="uid://dlr2xl5ep8mnt" path="res://scripts/ui_creature_collection.gd" id="6_d3jkd"]
 [ext_resource type="Texture2D" uid="uid://c852pq4sjupin" path="res://sprites/health-clip.png" id="7_ejswk"]
 [ext_resource type="Texture2D" uid="uid://bad16bvv64hm2" path="res://sprites/health-bar.png" id="8_bbk5w"]
@@ -13,9 +13,15 @@
 [ext_resource type="Script" uid="uid://bliw136owchrm" path="res://scripts/ui_error.gd" id="9_2ku1j"]
 [ext_resource type="Texture2D" uid="uid://b7pq28cvwklst" path="res://sprites/health-bar-slow.png" id="9_conm7"]
 [ext_resource type="Script" uid="uid://bdv5g18c78bqw" path="res://scripts/ui_hotkeys.gd" id="10_f31uk"]
+[ext_resource type="Texture2D" uid="uid://dxcmm6jjon0q4" path="res://sprites/snek-friend.png" id="11_14jow"]
 [ext_resource type="Texture2D" uid="uid://u82yks32qw5r" path="res://sprites/capture-success.png" id="11_gnai3"]
+[ext_resource type="Texture2D" uid="uid://de3cxmar2ett5" path="res://sprites/mush-friend.png" id="12_1ooyw"]
 [ext_resource type="Texture2D" uid="uid://budohfj7443ya" path="res://sprites/capture.png" id="12_i8kv5"]
+[ext_resource type="Texture2D" uid="uid://bd8yw7qvk7s12" path="res://sprites/firn-friend.png" id="12_u068y"]
+[ext_resource type="Texture2D" uid="uid://dypg3msnnxfqq" path="res://sprites/snel-friend.png" id="13_1ooyw"]
 [ext_resource type="Texture2D" uid="uid://bgdywiw2vvaih" path="res://sprites/potion.png" id="13_dxn3v"]
+[ext_resource type="Texture2D" uid="uid://dxo4s2th7lkme" path="res://sprites/big-mush-friend.png" id="14_ai3nx"]
+[ext_resource type="Texture2D" uid="uid://biououyyikk8m" path="res://sprites/dino-friend.png" id="15_phfsf"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ru4tf"]
 
@@ -48,6 +54,8 @@ sky = SubResource("Sky_jwv3a")
 ambient_light_color = Color(0.403922, 0.592157, 1, 1)
 
 [node name="Level1" type="Node3D"]
+script = ExtResource("1_14jow")
+_grassPatch = ExtResource("2_mvsps")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -104,12 +112,12 @@ mouse_filter = 2
 script = ExtResource("6_d3jkd")
 _slimeTexture = ExtResource("5_u3awl")
 _flyTexture = ExtResource("8_u3awl")
-_snekTexture = ExtResource("5_u3awl")
-_mushTexture = ExtResource("5_u3awl")
-_firnTexture = ExtResource("5_u3awl")
-_snelTexture = ExtResource("5_u3awl")
-_bigMushTexture = ExtResource("5_u3awl")
-_dinoTexture = ExtResource("5_u3awl")
+_snekTexture = ExtResource("11_14jow")
+_mushTexture = ExtResource("12_1ooyw")
+_firnTexture = ExtResource("12_u068y")
+_snelTexture = ExtResource("13_1ooyw")
+_bigMushTexture = ExtResource("14_ai3nx")
+_dinoTexture = ExtResource("15_phfsf")
 
 [node name="Progress" type="RichTextLabel" parent="UI/UICreatureCollection"]
 layout_mode = 0
@@ -458,15 +466,11 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_gnai3")
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+visible = false
 mesh = SubResource("BoxMesh_lgp48")
 
 [node name="Player" parent="." instance=ExtResource("1_6sh32")]
-
-[node name="Slime" parent="." instance=ExtResource("4_ejswk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2902969, 0, 0)
-
-[node name="Fly" parent="." instance=ExtResource("6_conm7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0069091, 0, 0.30009627)
+_movementSpeed = 4.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_dopym")

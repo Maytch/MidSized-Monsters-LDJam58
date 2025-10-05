@@ -8,11 +8,11 @@ enum PlayerAction { POTION, CAPTURE, SUMMON }
 var _currentAction = PlayerAction.SUMMON
 var _cooldownSpeed = 1.0
 var _potionCooldown = 0.0
-var _maxPotionCooldown = 5.0
+var _maxPotionCooldown = 4.0
 var _captureCooldown = 0.0
 var _maxCaptureCooldown = 2.0
 var _summonCooldown = 0.0
-var _maxSummonCooldown = 5.0
+var _maxSummonCooldown = 2.5
 
 var _selectedCreatureToSummon: CreatureRecord = null
 var _selectedCreatureIndex = 0

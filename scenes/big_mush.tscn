@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://dok0i5od5kj0p"]
+
+[ext_resource type="Script" uid="uid://m7f3hnbgsepk" path="res://scripts/creature.gd" id="1_whuil"]
+[ext_resource type="Texture2D" uid="uid://cmjxb15eainvj" path="res://sprites/big-mush.png" id="2_whuil"]
+[ext_resource type="Texture2D" uid="uid://dxo4s2th7lkme" path="res://sprites/big-mush-friend.png" id="3_ld83v"]
+[ext_resource type="Texture2D" uid="uid://cy6bnj1847xmi" path="res://sprites/capturing-anim.png" id="4_dbrjx"]
+[ext_resource type="Texture2D" uid="uid://bab7owslqjcyx" path="res://sprites/captured-anim.png" id="5_vh3ib"]
+[ext_resource type="Texture2D" uid="uid://ch237jqnb8eos" path="res://sprites/slime.png" id="6_25e56"]
+
+[node name="BigMush" type="Node3D"]
+script = ExtResource("1_whuil")
+_baseAttackBehaviourTime = 1.2
+_creatureType = 6
+_creatureName = "Big Mush"
+_level = 7
+_maxHealth = 120.0
+_attackDamage = 25.0
+_creatureTexture = ExtResource("2_whuil")
+_creatureFriendTexture = ExtResource("3_ld83v")
+_capturingTexture = ExtResource("4_dbrjx")
+_capturedTexture = ExtResource("5_vh3ib")
+_movementSpeed = 0.5
+
+[node name="Body" type="Node3D" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24, 0)
+shaded = true
+alpha_cut = 2
+texture_filter = 2
+texture = ExtResource("6_25e56")
+hframes = 2

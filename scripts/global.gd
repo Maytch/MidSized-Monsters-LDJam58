@@ -1,7 +1,7 @@
 extends Node
 
-var player
-var camera
+var player: Node3D
+var camera: Camera3D
 var uiHealth: UIHealth
 var uiCreatureCollection: UICreatureCollection
 var uiError: UIError
@@ -12,8 +12,8 @@ var friendCreatures: Array = []
 
 var creatureCollection = {}
 
-var potionCount = 5;
-var captureCount = 5;
+var potionCount = 50;
+var captureCount = 50;
 
 var potionHealAmount = 40;
 
@@ -25,12 +25,12 @@ var areaOfEffectScene = preload("res://scenes/area_of_effect.tscn")
 
 var slimeScene = preload("res://scenes/slime.tscn")
 var flyScene = preload("res://scenes/fly.tscn")
-var snekScene = preload("res://scenes/fly.tscn")
-var mushScene = preload("res://scenes/fly.tscn")
-var firnScene = preload("res://scenes/fly.tscn")
-var snelScene = preload("res://scenes/fly.tscn")
-var bigMushScene = preload("res://scenes/fly.tscn")
-var dinoScene = preload("res://scenes/fly.tscn")
+var snekScene = preload("res://scenes/snek.tscn")
+var mushScene = preload("res://scenes/mush.tscn")
+var firnScene = preload("res://scenes/firn.tscn")
+var snelScene = preload("res://scenes/snel.tscn")
+var bigMushScene = preload("res://scenes/big_mush.tscn")
+var dinoScene = preload("res://scenes/dino.tscn")
 
 func spawnCreature(creatureType: CreatureType) -> Creature:
 	var object = null

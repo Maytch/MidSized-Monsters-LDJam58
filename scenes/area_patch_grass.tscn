@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8xhfkd3fv2wb"]
+
+[ext_resource type="Script" uid="uid://50ur76osi737" path="res://scripts/area_patch.gd" id="1_3ertg"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_14jow"]
+size = Vector3(0.5, 0.2, 0.05)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3ertg"]
+size = Vector3(6, 0.1, 6)
+
+[node name="GrassPatch" type="Node3D"]
+script = ExtResource("1_3ertg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0742605, 0.103080094, -0.89375687)
+mesh = SubResource("BoxMesh_14jow")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0568252, 0.10308021, -0.07883346)
+mesh = SubResource("BoxMesh_14jow")
+
+[node name="EnemySpawns" type="Node3D" parent="."]
+
+[node name="Node3D" type="Node3D" parent="EnemySpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9664299, 0, -0.9889461)
+
+[node name="ItemSpawns" type="Node3D" parent="."]
+
+[node name="Node3D" type="Node3D" parent="ItemSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0466855, 0, -0.44984913)
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+mesh = SubResource("BoxMesh_3ertg")
