@@ -7,6 +7,7 @@ var uiCreatureCollection: UICreatureCollection
 var uiError: UIError
 var uiHotkeys: UIHotkeys
 var uiShop: UIShop
+var uiAssignKeys: UIAssignKeys
 
 var enemyCreatures: Array = []
 var friendCreatures: Array = []

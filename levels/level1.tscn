@@ -1,35 +1,35 @@
 [gd_scene load_steps=42 format=3 uid="uid://7ctrgjrqpkwl"]
 
-[ext_resource type="PackedScene" uid="uid://bky01l3kbljm5" path="res://scenes/player.tscn" id="1_6sh32"]
-[ext_resource type="Script" uid="uid://bb1ocfsmf3msl" path="res://scripts/level_generator.gd" id="1_14jow"]
-[ext_resource type="PackedScene" uid="uid://c1rj0t8t0gwhu" path="res://scenes/area_patch_cave.tscn" id="2_7dkav"]
-[ext_resource type="PackedScene" uid="uid://c8xhfkd3fv2wb" path="res://scenes/area_patch_grass.tscn" id="2_mvsps"]
-[ext_resource type="PackedScene" uid="uid://b1idffdaf7jjk" path="res://scenes/area_patch_chest.tscn" id="3_4niyd"]
-[ext_resource type="PackedScene" uid="uid://et6ndynslum8" path="res://scenes/area_patch_grass_lots.tscn" id="5_3umqw"]
-[ext_resource type="Script" uid="uid://jufy6c6k86fj" path="res://scripts/ui_health.gd" id="5_ru4tf"]
-[ext_resource type="Texture2D" uid="uid://c2dp66ogchyo7" path="res://sprites/slime-friend.png" id="5_u3awl"]
-[ext_resource type="Texture2D" uid="uid://ucjlptk75o3c" path="res://sprites/health-container.png" id="6_6sh32"]
-[ext_resource type="Script" uid="uid://dlr2xl5ep8mnt" path="res://scripts/ui_creature_collection.gd" id="6_d3jkd"]
-[ext_resource type="PackedScene" uid="uid://bm2mgrkawnjyw" path="res://scenes/area_patch_shop_capture.tscn" id="6_gqmnx"]
-[ext_resource type="Texture2D" uid="uid://c852pq4sjupin" path="res://sprites/health-clip.png" id="7_ejswk"]
-[ext_resource type="PackedScene" uid="uid://c6e53baw45u8v" path="res://scenes/area_patch_shop_potion.tscn" id="7_p71k4"]
-[ext_resource type="PackedScene" uid="uid://bf3mrewfkco71" path="res://scenes/area_patch_tree.tscn" id="8_1oofn"]
-[ext_resource type="Texture2D" uid="uid://bad16bvv64hm2" path="res://sprites/health-bar.png" id="8_bbk5w"]
-[ext_resource type="Texture2D" uid="uid://dvnhv6dhhwdsx" path="res://sprites/fly-friend.png" id="8_u3awl"]
-[ext_resource type="Script" uid="uid://bliw136owchrm" path="res://scripts/ui_error.gd" id="9_2ku1j"]
-[ext_resource type="Texture2D" uid="uid://b7pq28cvwklst" path="res://sprites/health-bar-slow.png" id="9_conm7"]
-[ext_resource type="Script" uid="uid://bdv5g18c78bqw" path="res://scripts/ui_hotkeys.gd" id="10_f31uk"]
-[ext_resource type="Texture2D" uid="uid://dxcmm6jjon0q4" path="res://sprites/snek-friend.png" id="11_14jow"]
-[ext_resource type="Texture2D" uid="uid://u82yks32qw5r" path="res://sprites/capture-success.png" id="11_gnai3"]
-[ext_resource type="Texture2D" uid="uid://de3cxmar2ett5" path="res://sprites/mush-friend.png" id="12_1ooyw"]
-[ext_resource type="Texture2D" uid="uid://budohfj7443ya" path="res://sprites/capture.png" id="12_i8kv5"]
-[ext_resource type="Texture2D" uid="uid://bd8yw7qvk7s12" path="res://sprites/firn-friend.png" id="12_u068y"]
-[ext_resource type="Texture2D" uid="uid://dypg3msnnxfqq" path="res://sprites/snel-friend.png" id="13_1ooyw"]
-[ext_resource type="Texture2D" uid="uid://bgdywiw2vvaih" path="res://sprites/potion.png" id="13_dxn3v"]
-[ext_resource type="Script" uid="uid://dg388jrouaq3m" path="res://scripts/ui_shop.gd" id="14_3umqw"]
-[ext_resource type="Texture2D" uid="uid://dxo4s2th7lkme" path="res://sprites/big-mush-friend.png" id="14_ai3nx"]
-[ext_resource type="Texture2D" uid="uid://biououyyikk8m" path="res://sprites/dino-friend.png" id="15_phfsf"]
-[ext_resource type="Texture2D" uid="uid://df7fio3qygjrr" path="res://sprites/coin.png" id="28_4niyd"]
+[ext_resource type="Script" uid="uid://bb1ocfsmf3msl" path="res://scripts/level_generator.gd" id="1_4mjh6"]
+[ext_resource type="PackedScene" uid="uid://c1rj0t8t0gwhu" path="res://scenes/area_patch_cave.tscn" id="2_7fu2r"]
+[ext_resource type="PackedScene" uid="uid://b1idffdaf7jjk" path="res://scenes/area_patch_chest.tscn" id="3_5xpsa"]
+[ext_resource type="PackedScene" uid="uid://c8xhfkd3fv2wb" path="res://scenes/area_patch_grass.tscn" id="4_yn1es"]
+[ext_resource type="PackedScene" uid="uid://et6ndynslum8" path="res://scenes/area_patch_grass_lots.tscn" id="5_3612o"]
+[ext_resource type="PackedScene" uid="uid://bm2mgrkawnjyw" path="res://scenes/area_patch_shop_capture.tscn" id="6_cnn1a"]
+[ext_resource type="PackedScene" uid="uid://c6e53baw45u8v" path="res://scenes/area_patch_shop_potion.tscn" id="7_sqx3p"]
+[ext_resource type="PackedScene" uid="uid://bf3mrewfkco71" path="res://scenes/area_patch_tree.tscn" id="8_c124c"]
+[ext_resource type="Script" uid="uid://jufy6c6k86fj" path="res://scripts/ui_health.gd" id="9_poyfc"]
+[ext_resource type="Texture2D" uid="uid://ucjlptk75o3c" path="res://sprites/health-container.png" id="10_r8rrl"]
+[ext_resource type="Texture2D" uid="uid://c852pq4sjupin" path="res://sprites/health-clip.png" id="11_1o3wi"]
+[ext_resource type="Texture2D" uid="uid://b7pq28cvwklst" path="res://sprites/health-bar-slow.png" id="12_3bikl"]
+[ext_resource type="Texture2D" uid="uid://bad16bvv64hm2" path="res://sprites/health-bar.png" id="13_m1ihp"]
+[ext_resource type="Script" uid="uid://dg388jrouaq3m" path="res://scripts/ui_shop.gd" id="14_g36py"]
+[ext_resource type="Texture2D" uid="uid://df7fio3qygjrr" path="res://sprites/coin.png" id="15_7cai6"]
+[ext_resource type="Script" uid="uid://dlr2xl5ep8mnt" path="res://scripts/ui_creature_collection.gd" id="16_ef3fr"]
+[ext_resource type="Texture2D" uid="uid://c2dp66ogchyo7" path="res://sprites/slime-friend.png" id="17_www5i"]
+[ext_resource type="Texture2D" uid="uid://dvnhv6dhhwdsx" path="res://sprites/fly-friend.png" id="18_1tw8r"]
+[ext_resource type="Texture2D" uid="uid://dxcmm6jjon0q4" path="res://sprites/snek-friend.png" id="19_c6dxu"]
+[ext_resource type="Texture2D" uid="uid://de3cxmar2ett5" path="res://sprites/mush-friend.png" id="20_v0nts"]
+[ext_resource type="Texture2D" uid="uid://bd8yw7qvk7s12" path="res://sprites/firn-friend.png" id="21_7vben"]
+[ext_resource type="Texture2D" uid="uid://dypg3msnnxfqq" path="res://sprites/snel-friend.png" id="22_iwss6"]
+[ext_resource type="Texture2D" uid="uid://dxo4s2th7lkme" path="res://sprites/big-mush-friend.png" id="23_ow214"]
+[ext_resource type="Texture2D" uid="uid://biououyyikk8m" path="res://sprites/dino-friend.png" id="24_ox30j"]
+[ext_resource type="Script" uid="uid://bliw136owchrm" path="res://scripts/ui_error.gd" id="25_sgfng"]
+[ext_resource type="Script" uid="uid://bdv5g18c78bqw" path="res://scripts/ui_hotkeys.gd" id="26_p6dnf"]
+[ext_resource type="Texture2D" uid="uid://u82yks32qw5r" path="res://sprites/capture-success.png" id="27_unj4i"]
+[ext_resource type="Texture2D" uid="uid://budohfj7443ya" path="res://sprites/capture.png" id="28_sadvb"]
+[ext_resource type="Texture2D" uid="uid://bgdywiw2vvaih" path="res://sprites/potion.png" id="29_tk73g"]
+[ext_resource type="PackedScene" uid="uid://bky01l3kbljm5" path="res://scenes/player.tscn" id="30_q7fj0"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ru4tf"]
 
@@ -74,14 +74,14 @@ sky = SubResource("Sky_jwv3a")
 ambient_light_color = Color(0.403922, 0.592157, 1, 1)
 
 [node name="Level1" type="Node3D"]
-script = ExtResource("1_14jow")
-_cavePatch = ExtResource("2_7dkav")
-_chestPatch = ExtResource("3_4niyd")
-_grassPatch = ExtResource("2_mvsps")
-_grassLotsPatch = ExtResource("5_3umqw")
-_shopCapturePatch = ExtResource("6_gqmnx")
-_shopPotionPatch = ExtResource("7_p71k4")
-_treePatch = ExtResource("8_1oofn")
+script = ExtResource("1_4mjh6")
+_cavePatch = ExtResource("2_7fu2r")
+_chestPatch = ExtResource("3_5xpsa")
+_grassPatch = ExtResource("4_yn1es")
+_grassLotsPatch = ExtResource("5_3612o")
+_shopCapturePatch = ExtResource("6_cnn1a")
+_shopPotionPatch = ExtResource("7_sqx3p")
+_treePatch = ExtResource("8_c124c")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -96,7 +96,7 @@ mouse_filter = 2
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("5_ru4tf")
+script = ExtResource("9_poyfc")
 
 [node name="PanelContainer" type="PanelContainer" parent="UI/UIHealth"]
 custom_minimum_size = Vector2(40, 4)
@@ -110,30 +110,32 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_ru4tf")
 
 [node name="Container" type="Sprite2D" parent="UI/UIHealth/PanelContainer"]
 texture_filter = 1
-texture = ExtResource("6_6sh32")
+texture = ExtResource("10_r8rrl")
 
 [node name="Clip" type="Sprite2D" parent="UI/UIHealth/PanelContainer"]
 clip_children = 1
 texture_filter = 1
-texture = ExtResource("7_ejswk")
+texture = ExtResource("11_1o3wi")
 
 [node name="SlowBar" type="Sprite2D" parent="UI/UIHealth/PanelContainer/Clip"]
 texture_filter = 1
-texture = ExtResource("9_conm7")
+texture = ExtResource("12_3bikl")
 
 [node name="Bar" type="Sprite2D" parent="UI/UIHealth/PanelContainer/Clip"]
 texture_filter = 1
-texture = ExtResource("8_bbk5w")
+texture = ExtResource("13_m1ihp")
 
 [node name="UIShop" type="Control" parent="UI"]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("14_3umqw")
+script = ExtResource("14_g36py")
 
 [node name="Buy" type="PanelContainer" parent="UI/UIShop"]
 custom_minimum_size = Vector2(64, 50)
 layout_mode = 0
+offset_left = -64.0
+offset_bottom = 50.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/UIShop/Buy"]
 layout_mode = 2
@@ -183,7 +185,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_gnai3")
 [node name="Sprite2D" type="Sprite2D" parent="UI/UIShop/Buy/Panel"]
 texture_filter = 1
 position = Vector2(32, 12)
-texture = ExtResource("28_4niyd")
+texture = ExtResource("15_7cai6")
 offset = Vector2(0, 20)
 
 [node name="UICreatureCollection" type="Control" parent="UI"]
@@ -196,15 +198,15 @@ anchor_bottom = 0.5
 grow_horizontal = 0
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("6_d3jkd")
-_slimeTexture = ExtResource("5_u3awl")
-_flyTexture = ExtResource("8_u3awl")
-_snekTexture = ExtResource("11_14jow")
-_mushTexture = ExtResource("12_1ooyw")
-_firnTexture = ExtResource("12_u068y")
-_snelTexture = ExtResource("13_1ooyw")
-_bigMushTexture = ExtResource("14_ai3nx")
-_dinoTexture = ExtResource("15_phfsf")
+script = ExtResource("16_ef3fr")
+_slimeTexture = ExtResource("17_www5i")
+_flyTexture = ExtResource("18_1tw8r")
+_snekTexture = ExtResource("19_c6dxu")
+_mushTexture = ExtResource("20_v0nts")
+_firnTexture = ExtResource("21_7vben")
+_snelTexture = ExtResource("22_iwss6")
+_bigMushTexture = ExtResource("23_ow214")
+_dinoTexture = ExtResource("24_ox30j")
 
 [node name="Progress" type="RichTextLabel" parent="UI/UICreatureCollection"]
 layout_mode = 0
@@ -294,7 +296,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_d3jkd")
 
 [node name="Sprite2D" type="Sprite2D" parent="UI/UICreatureCollection/Template/HBoxContainer/Panel"]
 texture_filter = 1
-texture = ExtResource("5_u3awl")
+texture = ExtResource("17_www5i")
 offset = Vector2(24, 24)
 hframes = 2
 
@@ -323,7 +325,7 @@ offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 40.0
 grow_horizontal = 2
-script = ExtResource("9_2ku1j")
+script = ExtResource("25_sgfng")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/UIError"]
 layout_mode = 0
@@ -355,7 +357,7 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
-script = ExtResource("10_f31uk")
+script = ExtResource("26_p6dnf")
 
 [node name="Panel" type="Panel" parent="UI/UIHotkeys"]
 layout_mode = 0
@@ -397,7 +399,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_gnai3")
 [node name="Sprite2D" type="Sprite2D" parent="UI/UIHotkeys/Panel/HBoxContainer/Summon/VBoxContainer/Panel"]
 texture_filter = 1
 position = Vector2(32, 12)
-texture = ExtResource("11_gnai3")
+texture = ExtResource("27_unj4i")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/UIHotkeys/Panel/HBoxContainer/Summon/VBoxContainer"]
 layout_mode = 2
@@ -456,7 +458,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_gnai3")
 [node name="Sprite2D" type="Sprite2D" parent="UI/UIHotkeys/Panel/HBoxContainer/Capture/VBoxContainer/Panel"]
 texture_filter = 1
 position = Vector2(32, 12)
-texture = ExtResource("12_i8kv5")
+texture = ExtResource("28_sadvb")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/UIHotkeys/Panel/HBoxContainer/Capture/VBoxContainer"]
 layout_mode = 2
@@ -517,7 +519,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_gnai3")
 [node name="Sprite2D" type="Sprite2D" parent="UI/UIHotkeys/Panel/HBoxContainer/Potion/VBoxContainer/Panel"]
 texture_filter = 1
 position = Vector2(32, 12)
-texture = ExtResource("13_dxn3v")
+texture = ExtResource("29_tk73g")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/UIHotkeys/Panel/HBoxContainer/Potion/VBoxContainer"]
 layout_mode = 2
@@ -581,7 +583,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_gnai3")
 [node name="Sprite2D" type="Sprite2D" parent="UI/UIHotkeys/Panel/Coin/VBoxContainer/Panel"]
 texture_filter = 1
 position = Vector2(32, 12)
-texture = ExtResource("28_4niyd")
+texture = ExtResource("15_7cai6")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/UIHotkeys/Panel/Coin/VBoxContainer"]
 layout_mode = 2
@@ -603,7 +605,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 visible = false
 mesh = SubResource("BoxMesh_lgp48")
 
-[node name="Player" parent="." instance=ExtResource("1_6sh32")]
+[node name="Player" parent="." instance=ExtResource("30_q7fj0")]
 _movementSpeed = 4.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
