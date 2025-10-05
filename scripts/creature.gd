@@ -200,7 +200,8 @@ func continueBehaviour(delta: float) -> void:
 func takeDamage(damage: float) -> void:
 	if _currentState == State.DEAD or _currentState == State.IN_CAPTURE:
 		return
-		
+	
+	Global.player.playHurt()
 	_currentHealth -= damage
 	if _currentHealth <= 0:
 		die()
@@ -262,6 +263,7 @@ func capture() -> void:
 	Global.uiCreatureCollection.updateCollection(true)
 	Global.enemyCreatures.erase(self)
 	Global.uiHealth.unregisterCreatureHealthBar(self)
+	Global.player.playCaptured()
 	queue_free()
 	return
 
@@ -281,6 +283,7 @@ func die() -> void:
 		if Global.creatureCollection.has(_key):
 			Global.creatureCollection.erase(_key)
 			Global.uiCreatureCollection.updateCollection(true)
+		Global.player.playFriendDeath()
 	else:
 		Global.enemyCreatures.erase(self)
 	

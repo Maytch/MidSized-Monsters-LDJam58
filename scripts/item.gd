@@ -20,10 +20,13 @@ func _physics_process(delta: float) -> void:
 		match _itemType:
 			Global.ItemType.POTION:
 				Global.potionCount += 1
+				Global.player.playItemPickup()
 			Global.ItemType.CAPTURE:
 				Global.captureCount += 1
+				Global.player.playItemPickup()
 			Global.ItemType.COIN:
 				Global.coinCount += 1
+				Global.player.playCoinPickup()
 		Global.uiHotkeys.updateQuantities(Global.captureCount, Global.potionCount, Global.coinCount)
 		queue_free()
 	return

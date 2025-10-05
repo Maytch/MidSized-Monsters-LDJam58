@@ -1,7 +1,17 @@
 extends Living
+class_name Player
 
 @onready var _camera = $Camera3D
 @onready var _areaOfEffect: AreaOfEffect = $AreaOfEffect
+
+@onready var _coinPlayer: AudioStreamPlayer3D = $CoinPlayer
+@onready var _friendDeathPlayer: AudioStreamPlayer3D = $FriendDeathPlayer
+@onready var _capturedPlayer: AudioStreamPlayer3D = $CapturedPlayer
+@onready var _itemPlayer: AudioStreamPlayer3D = $ItemPlayer
+@onready var _hurtPlayer: AudioStreamPlayer3D = $HurtPlayer
+@onready var _healPlayer: AudioStreamPlayer3D = $HealPlayer
+@onready var _summonPlayer: AudioStreamPlayer3D = $SummonPlayer
+@onready var _tryCapturePlayer: AudioStreamPlayer3D = $TryCapturePlayer
 
 enum PlayerAction { POTION, CAPTURE, SUMMON }
 
@@ -16,6 +26,46 @@ var _maxSummonCooldown = 2.5
 
 var _selectedCreatureToSummon: CreatureRecord = null
 var _selectedCreatureIndex = 0
+
+func playCoinPickup() -> void:
+	_coinPlayer.pitch_scale = randf_range(1.0, 1.2)
+	_coinPlayer.play()
+	return
+
+func playFriendDeath() -> void:
+	_friendDeathPlayer.pitch_scale = randf_range(0.9, 1.1)
+	_friendDeathPlayer.play()
+	return
+
+func playCaptured() -> void:
+	_capturedPlayer.pitch_scale = randf_range(0.9, 1.1)
+	_capturedPlayer.play()
+	return
+
+func playItemPickup() -> void:
+	_itemPlayer.pitch_scale = randf_range(0.9, 1.1)
+	_itemPlayer.play()
+	return
+
+func playHurt() -> void:
+	_hurtPlayer.pitch_scale = randf_range(0.9, 1.1)
+	_hurtPlayer.play()
+	return
+
+func playHeal() -> void:
+	_healPlayer.pitch_scale = randf_range(1.1, 1.3)
+	_healPlayer.play()
+	return
+	
+func playSummon() -> void:
+	_summonPlayer.pitch_scale = randf_range(0.9, 1.1)
+	_summonPlayer.play()
+	return
+	
+func playTryCapture() -> void:
+	_tryCapturePlayer.pitch_scale = randf_range(0.9, 1.1)
+	_tryCapturePlayer.play()
+	return
 
 func _ready() -> void:
 	super()

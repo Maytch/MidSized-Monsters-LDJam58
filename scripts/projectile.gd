@@ -140,6 +140,7 @@ func triggerCapture() -> void:
 	var creature = getNearestCreatureInRange(1.0, false)
 	if creature == null:
 		return
+	Global.player.playTryCapture()
 	
 	creature.tryCapture()
 	return
@@ -147,6 +148,7 @@ func triggerCapture() -> void:
 func triggerSummon() -> void:
 	if _creatureRecordToSummon == null:
 		return
+	Global.player.playSummon()
 		
 	var creature: Creature = Global.spawnCreature(_creatureRecordToSummon.creatureType)
 	creature.setup(_creatureRecordToSummon)
@@ -157,6 +159,7 @@ func triggerSummon() -> void:
 	return
 	
 func triggerPotion() -> void:
+	Global.player.playHeal()
 	var creatures = getCreaturesInRange(1.5, true)
 	 
 	for i in range(creatures.size()):

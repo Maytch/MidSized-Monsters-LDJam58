@@ -1,6 +1,6 @@
 extends Node
 
-var player: Node3D
+var player: Player
 var camera: Camera3D
 var uiHealth: UIHealth
 var uiCreatureCollection: UICreatureCollection

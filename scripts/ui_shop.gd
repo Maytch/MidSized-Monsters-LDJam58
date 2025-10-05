@@ -65,5 +65,6 @@ func tryToBuyItem() -> void:
 		Global.coinCount -= _currentShop.cost
 		
 	Global.uiHotkeys.updateQuantities(Global.captureCount, Global.potionCount, Global.coinCount)
+	Global.player.playItemPickup()
 		
 	return
