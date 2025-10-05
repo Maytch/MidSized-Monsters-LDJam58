@@ -67,10 +67,10 @@ corner_detail = 5
 [sub_resource type="BoxMesh" id="BoxMesh_lgp48"]
 size = Vector3(10, 0.1, 10)
 
-[sub_resource type="Sky" id="Sky_jwv3a"]
+[sub_resource type="Sky" id="Sky_4mjh6"]
 
 [sub_resource type="Environment" id="Environment_dopym"]
-sky = SubResource("Sky_jwv3a")
+sky = SubResource("Sky_4mjh6")
 ambient_light_color = Color(0.403922, 0.592157, 1, 1)
 
 [node name="Level1" type="Node3D"]
@@ -614,7 +614,6 @@ environment = SubResource("Environment_dopym")
 [node name="SunLight" type="DirectionalLight3D" parent="WorldEnvironment"]
 transform = Transform3D(-0.503243, -0.63833, -0.582478, 0.0945147, -0.710666, 0.697152, -0.858961, 0.295784, 0.41797, -1.0772, 2.48507, 2.25749)
 light_color = Color(1, 0.878484, 0.727108, 1)
-light_energy = 2.231
 light_cull_mask = 4294967293
 shadow_enabled = true
 shadow_bias = 0.05

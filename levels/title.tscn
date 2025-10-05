@@ -1,8 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://dg2kll0yr3ayw"]
+[gd_scene load_steps=23 format=3 uid="uid://dg2kll0yr3ayw"]
 
 [ext_resource type="Script" uid="uid://dnghrmcu4xh5c" path="res://scripts/key_assign.gd" id="1_0byv1"]
 [ext_resource type="Script" uid="uid://b02vdda4angy2" path="res://scripts/ui_assign_keys.gd" id="1_k86xs"]
 [ext_resource type="Script" uid="uid://bdl37u7w8cy2v" path="res://scripts/start_game.gd" id="3_gwl5o"]
+[ext_resource type="Script" uid="uid://bq2jpvn4w34iu" path="res://scripts/title_camera.gd" id="4_k5sll"]
+[ext_resource type="PackedScene" uid="uid://c6e53baw45u8v" path="res://scenes/area_patch_shop_potion.tscn" id="6_kevmy"]
+[ext_resource type="PackedScene" uid="uid://c8xhfkd3fv2wb" path="res://scenes/area_patch_grass.tscn" id="6_pr3u7"]
+[ext_resource type="PackedScene" uid="uid://bf3mrewfkco71" path="res://scenes/area_patch_tree.tscn" id="7_7gau0"]
+[ext_resource type="PackedScene" uid="uid://tyuq1jj7ulyw" path="res://scenes/firn.tscn" id="8_pr3u7"]
+[ext_resource type="PackedScene" uid="uid://bnjn4jpty7agr" path="res://scenes/fly.tscn" id="9_3b5ce"]
+[ext_resource type="PackedScene" uid="uid://d0vkybe1flo6m" path="res://scenes/dino.tscn" id="10_a8nlw"]
+[ext_resource type="PackedScene" uid="uid://dok0i5od5kj0p" path="res://scenes/big_mush.tscn" id="11_pflh1"]
+[ext_resource type="PackedScene" uid="uid://dytui2nhhck6f" path="res://scenes/mush.tscn" id="12_4ca30"]
+[ext_resource type="PackedScene" uid="uid://co275n4lpsop1" path="res://scenes/slime.tscn" id="13_yubbh"]
+[ext_resource type="PackedScene" uid="uid://b6fk65t834dml" path="res://scenes/snek.tscn" id="14_lmj6f"]
+[ext_resource type="PackedScene" uid="uid://cjx3eb7me3m2f" path="res://scenes/snel.tscn" id="15_derbo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k86xs"]
 content_margin_left = 0.0
@@ -26,16 +38,22 @@ border_color = Color(0.8, 0.8, 0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e6com"]
 
-[node name="Title" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pr3u7"]
+albedo_color = Color(0.8, 0.7122667, 0.688, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qhqgy"]
+size = Vector3(25, 0.1, 25)
+
+[sub_resource type="Sky" id="Sky_jwv3a"]
+
+[sub_resource type="Environment" id="Environment_gwl5o"]
+sky = SubResource("Sky_jwv3a")
+ambient_light_color = Color(0.403922, 0.592157, 1, 1)
+
+[node name="Title" type="Node3D"]
 
 [node name="UIAssignKeys" type="Control" parent="."]
-layout_mode = 1
+layout_mode = 3
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -364,7 +382,6 @@ horizontal_alignment = 1
 
 [node name="StartGame" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(256, 32)
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -392,7 +409,6 @@ fit_content = true
 horizontal_alignment = 1
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="."]
-layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -419,3 +435,76 @@ fit_content = true
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Title" type="RichTextLabel" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/normal_font_size = 64
+theme_override_font_sizes/bold_font_size = 64
+theme_override_font_sizes/bold_italics_font_size = 64
+theme_override_font_sizes/italics_font_size = 64
+theme_override_font_sizes/mono_font_size = 64
+text = "Mid-Sized Monsters"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+material_override = SubResource("StandardMaterial3D_pr3u7")
+mesh = SubResource("BoxMesh_qhqgy")
+skeleton = NodePath("")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.6991146, 0.7150096, 0, -0.7150096, 0.6991146, 0, 2.03141, 1.76424)
+fov = 65.0
+script = ExtResource("4_k5sll")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_gwl5o")
+
+[node name="SunLight" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-0.503243, -0.63833, -0.582478, 0.0945147, -0.710666, 0.697152, -0.858961, 0.295784, 0.41797, -1.0772, 2.48507, 2.25749)
+light_color = Color(1, 0.878484, 0.727108, 1)
+light_cull_mask = 4294967293
+shadow_enabled = true
+shadow_bias = 0.05
+shadow_normal_bias = 1.0
+shadow_caster_mask = 4294967293
+directional_shadow_blend_splits = true
+sky_mode = 1
+
+[node name="ShopPotionPatch" parent="." instance=ExtResource("6_kevmy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9881017, 3.5762787e-07, -1.2440023)
+
+[node name="GrassPatch" parent="." instance=ExtResource("6_pr3u7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.57026017, 0, 1.7945857)
+
+[node name="TreePatch" parent="." instance=ExtResource("7_7gau0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4930854, 0, -1.0229497)
+
+[node name="Firn" parent="." instance=ExtResource("8_pr3u7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.036129475, 0, -0.2549224)
+
+[node name="Fly" parent="." instance=ExtResource("9_3b5ce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.34277523, 0, 0.8616214)
+
+[node name="Dino" parent="." instance=ExtResource("10_a8nlw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7320229, 0, 0.34869623)
+
+[node name="BigMush" parent="." instance=ExtResource("11_pflh1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6293777, 0, -2.0441003)
+
+[node name="Mush" parent="." instance=ExtResource("12_4ca30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.81635493, 0, -1.1136975)
+
+[node name="Slime" parent="." instance=ExtResource("13_yubbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.277585, 1.1920929e-07, 0.724154)
+
+[node name="Snek" parent="." instance=ExtResource("14_lmj6f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.54639, 0, 0.525898)
+
+[node name="Snel" parent="." instance=ExtResource("15_derbo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0874257, 0, -0.5891092)

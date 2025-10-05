@@ -48,7 +48,8 @@ func _ready() -> void:
 	else:
 		Global.enemyCreatures.append(self)
 		
-	Global.uiHealth.registerCreatureHealthBar(self)
+	if Global.uiHealth != null:
+		Global.uiHealth.registerCreatureHealthBar(self)
 	
 	if _isFriend:
 		_sprite.texture = _creatureFriendTexture
