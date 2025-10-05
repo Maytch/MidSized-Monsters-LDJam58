@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bky01l3kbljm5"]
+[gd_scene load_steps=15 format=3 uid="uid://bky01l3kbljm5"]
 
 [ext_resource type="Script" uid="uid://d03xlu343tmde" path="res://scripts/player.gd" id="1_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://ceyfsa1rhpru" path="res://sprites/player.png" id="2_dqkch"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://bssjob5u58u6q" path="res://sounds/heal.wav" id="9_ur7pv"]
 [ext_resource type="AudioStream" uid="uid://dtfsx0cdam88h" path="res://sounds/summon.wav" id="10_d2wvv"]
 [ext_resource type="AudioStream" uid="uid://cbg27w06rmboa" path="res://sounds/try-capture.wav" id="11_3v2ag"]
+[ext_resource type="AudioStream" uid="uid://butvt7m1qg4el" path="res://sounds/walk.wav" id="12_3v2ag"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qhqgy"]
 albedo_color = Color(0.8, 0.7122667, 0.688, 1)
@@ -74,3 +75,7 @@ volume_db = -8.0
 [node name="TryCapturePlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("11_3v2ag")
 volume_db = -8.0
+
+[node name="WalkPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("12_3v2ag")
+volume_db = -27.044

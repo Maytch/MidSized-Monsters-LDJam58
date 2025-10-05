@@ -12,6 +12,7 @@ class_name Player
 @onready var _healPlayer: AudioStreamPlayer3D = $HealPlayer
 @onready var _summonPlayer: AudioStreamPlayer3D = $SummonPlayer
 @onready var _tryCapturePlayer: AudioStreamPlayer3D = $TryCapturePlayer
+@onready var _walkPlayer: AudioStreamPlayer3D = $WalkPlayer
 
 enum PlayerAction { POTION, CAPTURE, SUMMON }
 
@@ -27,45 +28,8 @@ var _maxSummonCooldown = 2.5
 var _selectedCreatureToSummon: CreatureRecord = null
 var _selectedCreatureIndex = 0
 
-func playCoinPickup() -> void:
-	_coinPlayer.pitch_scale = randf_range(1.0, 1.2)
-	_coinPlayer.play()
-	return
-
-func playFriendDeath() -> void:
-	_friendDeathPlayer.pitch_scale = randf_range(0.9, 1.1)
-	_friendDeathPlayer.play()
-	return
-
-func playCaptured() -> void:
-	_capturedPlayer.pitch_scale = randf_range(0.9, 1.1)
-	_capturedPlayer.play()
-	return
-
-func playItemPickup() -> void:
-	_itemPlayer.pitch_scale = randf_range(0.9, 1.1)
-	_itemPlayer.play()
-	return
-
-func playHurt() -> void:
-	_hurtPlayer.pitch_scale = randf_range(0.9, 1.1)
-	_hurtPlayer.play()
-	return
-
-func playHeal() -> void:
-	_healPlayer.pitch_scale = randf_range(1.1, 1.3)
-	_healPlayer.play()
-	return
-	
-func playSummon() -> void:
-	_summonPlayer.pitch_scale = randf_range(0.9, 1.1)
-	_summonPlayer.play()
-	return
-	
-func playTryCapture() -> void:
-	_tryCapturePlayer.pitch_scale = randf_range(0.9, 1.1)
-	_tryCapturePlayer.play()
-	return
+var _timeBetweenSteps = 0.0
+var _maxTimeBetweenSteps = 0.2
 
 func _ready() -> void:
 	super()
@@ -92,6 +56,7 @@ func _process(delta: float) -> void:
 	updateAreaOfEffect()
 	processPlayerInput()
 	updateAreaOfEffect()
+	#tryWalk(delta)
 	
 	return
 
@@ -274,3 +239,57 @@ func spawnProjectile() -> Projectile:
 	projectile.setStartingAreaOfEffectRotation(_areaOfEffect.rotation.y)
 	
 	return projectile
+
+func playCoinPickup() -> void:
+	_coinPlayer.pitch_scale = randf_range(1.0, 1.2)
+	_coinPlayer.play()
+	return
+
+func playFriendDeath() -> void:
+	_friendDeathPlayer.pitch_scale = randf_range(0.9, 1.1)
+	_friendDeathPlayer.play()
+	return
+
+func playCaptured() -> void:
+	_capturedPlayer.pitch_scale = randf_range(0.9, 1.1)
+	_capturedPlayer.play()
+	return
+
+func playItemPickup() -> void:
+	_itemPlayer.pitch_scale = randf_range(0.9, 1.1)
+	_itemPlayer.play()
+	return
+
+func playHurt() -> void:
+	_hurtPlayer.pitch_scale = randf_range(0.9, 1.1)
+	_hurtPlayer.play()
+	return
+
+func playHeal() -> void:
+	_healPlayer.pitch_scale = randf_range(1.1, 1.3)
+	_healPlayer.play()
+	return
+	
+func playSummon() -> void:
+	_summonPlayer.pitch_scale = randf_range(0.9, 1.1)
+	_summonPlayer.play()
+	return
+	
+func playTryCapture() -> void:
+	_tryCapturePlayer.pitch_scale = randf_range(0.9, 1.1)
+	_tryCapturePlayer.play()
+	return
+	
+func playWalk() -> void:
+	_walkPlayer.pitch_scale = randf_range(0.4, 0.7)
+	_walkPlayer.play()
+	return
+	
+func tryWalk(delta: float) -> void:
+	if _timeBetweenSteps > 0:
+		_timeBetweenSteps -= delta
+		
+	if _timeBetweenSteps <= 0 and abs(_moveX) + abs(_moveZ) > 0:
+		playWalk()
+		_timeBetweenSteps = _maxTimeBetweenSteps
+	return
