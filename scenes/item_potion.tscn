@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bo5rii75m7wlj"]
+
+[ext_resource type="Script" uid="uid://c3kydi3wwr682" path="res://scripts/item.gd" id="1_dbrxo"]
+[ext_resource type="Texture2D" uid="uid://bgdywiw2vvaih" path="res://sprites/potion.png" id="2_jybep"]
+
+[node name="PotionItem" type="Node3D"]
+script = ExtResource("1_dbrxo")
+
+[node name="Body" type="Node3D" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14675738, 0)
+alpha_cut = 2
+texture_filter = 2
+texture = ExtResource("2_jybep")

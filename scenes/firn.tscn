@@ -13,11 +13,12 @@ _baseAttackBehaviourTime = 0.25
 _creatureType = 4
 _creatureName = "Firn"
 _level = 5
-_maxHealth = 120.0
+_maxHealth = 200.0
 _creatureTexture = ExtResource("2_fj8vs")
 _creatureFriendTexture = ExtResource("3_ccgbc")
 _capturingTexture = ExtResource("4_0mb07")
 _capturedTexture = ExtResource("5_qus1v")
+_coinsToSpawn = 4
 _movementSpeed = 0.0
 
 [node name="Body" type="Node3D" parent="."]

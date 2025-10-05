@@ -15,6 +15,8 @@ class_name UIHotkeys
 @onready var _potionQuantity: RichTextLabel = $Panel/HBoxContainer/Potion/VBoxContainer/HBoxContainer/Quantity
 @onready var _potionCooldown: PanelContainer = $Panel/HBoxContainer/Potion/Cooldown
 
+@onready var _coinQuantity: RichTextLabel = $Panel/Coin/VBoxContainer/HBoxContainer/Quantity
+
 var _defaultSylebox: StyleBoxFlat
 var _highlightedStylebox : StyleBoxFlat
 
@@ -52,9 +54,10 @@ func updateCooldowns(summonCooldown: float, maxSummonCooldown: float, captureCoo
 	_potionCooldown.custom_minimum_size = Vector2(64.0, 66.0 * (potionCooldown / maxPotionCooldown))
 	return
 
-func updateQuantities(captureQuantity: int, potionQuantity: int) -> void:
+func updateQuantities(captureQuantity: int, potionQuantity: int, coinQuantity) -> void:
 	_captureQuantity.text = "x" + str(captureQuantity) + " "
 	_potionQuantity.text = "x" + str(potionQuantity) + " "
+	_coinQuantity.text = "x" + str(coinQuantity) + " "
 	return
 
 func updateKeys() -> void:

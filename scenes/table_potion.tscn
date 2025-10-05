@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1kmfnegj3lu0"]
+
+[ext_resource type="Script" uid="uid://b0lh14443rift" path="res://scripts/face_camera.gd" id="1_d0hog"]
+[ext_resource type="Texture2D" uid="uid://ducqtsdqy73j5" path="res://sprites/table-potion.png" id="2_d0hog"]
+
+[node name="TablePotion" type="Node3D"]
+script = ExtResource("1_d0hog")
+
+[node name="Body" type="Node3D" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.30409488, 0)
+alpha_cut = 2
+texture_filter = 2
+texture = ExtResource("2_d0hog")

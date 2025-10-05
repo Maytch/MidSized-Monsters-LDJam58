@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://brngqlnv28htw"]
+
+[ext_resource type="Script" uid="uid://b0lh14443rift" path="res://scripts/face_camera.gd" id="1_c3kuf"]
+[ext_resource type="Texture2D" uid="uid://bejp0krfkjn31" path="res://sprites/table-capture.png" id="2_c3kuf"]
+
+[node name="TableCapture" type="Node3D"]
+script = ExtResource("1_c3kuf")
+
+[node name="Body" type="Node3D" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27142915, 0)
+alpha_cut = 2
+texture_filter = 2
+texture = ExtResource("2_c3kuf")

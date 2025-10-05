@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://bf3mrewfkco71"]
+
+[ext_resource type="Script" uid="uid://50ur76osi737" path="res://scripts/area_patch.gd" id="1_pwl0x"]
+[ext_resource type="PackedScene" uid="uid://2kf1acsp5hrj" path="res://scenes/grass.tscn" id="2_oj7ad"]
+[ext_resource type="PackedScene" uid="uid://djms51lfaiy5s" path="res://scenes/tree.tscn" id="3_oj7ad"]
+
+[node name="TreePatch" type="Node3D"]
+script = ExtResource("1_pwl0x")
+_patchType = 6
+_itemSpawnChance = 0.15
+
+[node name="Grass" parent="." instance=ExtResource("2_oj7ad")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0793312, -0.005818218, 1.1091522)
+
+[node name="Tree" parent="." instance=ExtResource("3_oj7ad")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.44604862, -0.005818099, -0.51090133)
+
+[node name="EnemySpawns" type="Node3D" parent="."]
+
+[node name="Node3D" type="Node3D" parent="EnemySpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1242979, 0, 0.8070096)
+
+[node name="ItemSpawns" type="Node3D" parent="."]
+
+[node name="Node3D" type="Node3D" parent="ItemSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11068463, 0, -0.68113613)
+
+[node name="Node3D2" type="Node3D" parent="ItemSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3683316, 0, -0.015774727)

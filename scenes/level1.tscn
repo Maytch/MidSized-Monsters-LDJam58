@@ -1,13 +1,19 @@
-[gd_scene load_steps=33 format=3 uid="uid://7ctrgjrqpkwl"]
+[gd_scene load_steps=42 format=3 uid="uid://7ctrgjrqpkwl"]
 
 [ext_resource type="PackedScene" uid="uid://bky01l3kbljm5" path="res://scenes/player.tscn" id="1_6sh32"]
 [ext_resource type="Script" uid="uid://bb1ocfsmf3msl" path="res://scripts/level_generator.gd" id="1_14jow"]
+[ext_resource type="PackedScene" uid="uid://c1rj0t8t0gwhu" path="res://scenes/area_patch_cave.tscn" id="2_7dkav"]
 [ext_resource type="PackedScene" uid="uid://c8xhfkd3fv2wb" path="res://scenes/area_patch_grass.tscn" id="2_mvsps"]
+[ext_resource type="PackedScene" uid="uid://b1idffdaf7jjk" path="res://scenes/area_patch_chest.tscn" id="3_4niyd"]
+[ext_resource type="PackedScene" uid="uid://et6ndynslum8" path="res://scenes/area_patch_grass_lots.tscn" id="5_3umqw"]
 [ext_resource type="Script" uid="uid://jufy6c6k86fj" path="res://scripts/ui_health.gd" id="5_ru4tf"]
 [ext_resource type="Texture2D" uid="uid://c2dp66ogchyo7" path="res://sprites/slime-friend.png" id="5_u3awl"]
 [ext_resource type="Texture2D" uid="uid://ucjlptk75o3c" path="res://sprites/health-container.png" id="6_6sh32"]
 [ext_resource type="Script" uid="uid://dlr2xl5ep8mnt" path="res://scripts/ui_creature_collection.gd" id="6_d3jkd"]
+[ext_resource type="PackedScene" uid="uid://bm2mgrkawnjyw" path="res://scenes/area_patch_shop_capture.tscn" id="6_gqmnx"]
 [ext_resource type="Texture2D" uid="uid://c852pq4sjupin" path="res://sprites/health-clip.png" id="7_ejswk"]
+[ext_resource type="PackedScene" uid="uid://c6e53baw45u8v" path="res://scenes/area_patch_shop_potion.tscn" id="7_p71k4"]
+[ext_resource type="PackedScene" uid="uid://bf3mrewfkco71" path="res://scenes/area_patch_tree.tscn" id="8_1oofn"]
 [ext_resource type="Texture2D" uid="uid://bad16bvv64hm2" path="res://sprites/health-bar.png" id="8_bbk5w"]
 [ext_resource type="Texture2D" uid="uid://dvnhv6dhhwdsx" path="res://sprites/fly-friend.png" id="8_u3awl"]
 [ext_resource type="Script" uid="uid://bliw136owchrm" path="res://scripts/ui_error.gd" id="9_2ku1j"]
@@ -20,18 +26,20 @@
 [ext_resource type="Texture2D" uid="uid://bd8yw7qvk7s12" path="res://sprites/firn-friend.png" id="12_u068y"]
 [ext_resource type="Texture2D" uid="uid://dypg3msnnxfqq" path="res://sprites/snel-friend.png" id="13_1ooyw"]
 [ext_resource type="Texture2D" uid="uid://bgdywiw2vvaih" path="res://sprites/potion.png" id="13_dxn3v"]
+[ext_resource type="Script" uid="uid://dg388jrouaq3m" path="res://scripts/ui_shop.gd" id="14_3umqw"]
 [ext_resource type="Texture2D" uid="uid://dxo4s2th7lkme" path="res://sprites/big-mush-friend.png" id="14_ai3nx"]
 [ext_resource type="Texture2D" uid="uid://biououyyikk8m" path="res://sprites/dino-friend.png" id="15_phfsf"]
+[ext_resource type="Texture2D" uid="uid://df7fio3qygjrr" path="res://sprites/coin.png" id="28_4niyd"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ru4tf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gnai3"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_conm7"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d3jkd"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f31uk"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gnai3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gnai3"]
 bg_color = Color(0, 0, 0, 0.79607844)
@@ -44,6 +52,18 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.8, 0.8, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dkav"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
 [sub_resource type="BoxMesh" id="BoxMesh_lgp48"]
 size = Vector3(10, 0.1, 10)
 
@@ -55,7 +75,13 @@ ambient_light_color = Color(0.403922, 0.592157, 1, 1)
 
 [node name="Level1" type="Node3D"]
 script = ExtResource("1_14jow")
+_cavePatch = ExtResource("2_7dkav")
+_chestPatch = ExtResource("3_4niyd")
 _grassPatch = ExtResource("2_mvsps")
+_grassLotsPatch = ExtResource("5_3umqw")
+_shopCapturePatch = ExtResource("6_gqmnx")
+_shopPotionPatch = ExtResource("7_p71k4")
+_treePatch = ExtResource("8_1oofn")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -98,6 +124,67 @@ texture = ExtResource("9_conm7")
 [node name="Bar" type="Sprite2D" parent="UI/UIHealth/PanelContainer/Clip"]
 texture_filter = 1
 texture = ExtResource("8_bbk5w")
+
+[node name="UIShop" type="Control" parent="UI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("14_3umqw")
+
+[node name="Buy" type="PanelContainer" parent="UI/UIShop"]
+custom_minimum_size = Vector2(64, 50)
+layout_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/UIShop/Buy"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/UIShop/Buy/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+theme_override_font_sizes/mono_font_size = 12
+text = "Buy for"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/UIShop/Buy/VBoxContainer"]
+layout_mode = 2
+
+[node name="Key" type="RichTextLabel" parent="UI/UIShop/Buy/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+theme_override_font_sizes/mono_font_size = 12
+text = " []"
+fit_content = true
+
+[node name="Cost" type="RichTextLabel" parent="UI/UIShop/Buy/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+theme_override_font_sizes/mono_font_size = 12
+text = "x5 "
+fit_content = true
+horizontal_alignment = 2
+
+[node name="Panel" type="Panel" parent="UI/UIShop/Buy"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_gnai3")
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/UIShop/Buy/Panel"]
+texture_filter = 1
+position = Vector2(32, 12)
+texture = ExtResource("28_4niyd")
+offset = Vector2(0, 20)
 
 [node name="UICreatureCollection" type="Control" parent="UI"]
 layout_mode = 1
@@ -463,6 +550,53 @@ custom_minimum_size = Vector2(0, 66)
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_gnai3")
+
+[node name="Coin" type="PanelContainer" parent="UI/UIHotkeys/Panel"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = 400.0
+offset_right = 464.0
+offset_bottom = 68.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_7dkav")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/UIHotkeys/Panel/Coin"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/UIHotkeys/Panel/Coin/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+theme_override_font_sizes/mono_font_size = 12
+text = "Coins"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="UI/UIHotkeys/Panel/Coin/VBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_gnai3")
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/UIHotkeys/Panel/Coin/VBoxContainer/Panel"]
+texture_filter = 1
+position = Vector2(32, 12)
+texture = ExtResource("28_4niyd")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/UIHotkeys/Panel/Coin/VBoxContainer"]
+layout_mode = 2
+
+[node name="Quantity" type="RichTextLabel" parent="UI/UIHotkeys/Panel/Coin/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+theme_override_font_sizes/mono_font_size = 12
+text = "x0 "
+fit_content = true
+horizontal_alignment = 2
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)

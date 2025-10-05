@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://djms51lfaiy5s"]
+
+[ext_resource type="Script" uid="uid://b0lh14443rift" path="res://scripts/face_camera.gd" id="1_vplca"]
+[ext_resource type="Texture2D" uid="uid://c2r87d2o0rnh2" path="res://sprites/tree.png" id="2_vplca"]
+
+[node name="Tree" type="Node3D"]
+script = ExtResource("1_vplca")
+
+[node name="Body" type="Node3D" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0832384, 0)
+alpha_cut = 2
+texture_filter = 2
+texture = ExtResource("2_vplca")

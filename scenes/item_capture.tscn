@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://0hptrdddus8r"]
+
+[ext_resource type="Script" uid="uid://c3kydi3wwr682" path="res://scripts/item.gd" id="1_w335g"]
+[ext_resource type="Texture2D" uid="uid://budohfj7443ya" path="res://sprites/capture.png" id="2_3vvis"]
+
+[node name="CaptureItem" type="Node3D"]
+script = ExtResource("1_w335g")
+_itemType = 1
+
+[node name="Body" type="Node3D" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11984481, 0)
+alpha_cut = 2
+texture_filter = 2
+texture = ExtResource("2_3vvis")

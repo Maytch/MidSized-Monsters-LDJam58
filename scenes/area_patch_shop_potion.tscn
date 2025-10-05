@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://c6e53baw45u8v"]
+
+[ext_resource type="Script" uid="uid://50ur76osi737" path="res://scripts/area_patch.gd" id="1_sf7xl"]
+[ext_resource type="PackedScene" uid="uid://d0hb484o7fhfc" path="res://scenes/shop.tscn" id="2_sf7xl"]
+[ext_resource type="PackedScene" uid="uid://dik1gpri16q0w" path="res://scenes/npc.tscn" id="3_1mre8"]
+[ext_resource type="PackedScene" uid="uid://c1kmfnegj3lu0" path="res://scenes/table_potion.tscn" id="4_ggopc"]
+[ext_resource type="Script" uid="uid://dtgvefxxg0ixl" path="res://scripts/shop.gd" id="5_1nl0s"]
+
+[node name="ShopPotionPatch" type="Node3D"]
+script = ExtResource("1_sf7xl")
+_patchType = 5
+_enemySpawnChance = 0.0
+_itemSpawnChance = 0.0
+
+[node name="Shop" parent="." instance=ExtResource("2_sf7xl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0010906458, -0.005818218, -0.54677534)
+
+[node name="NPC" parent="." instance=ExtResource("3_1mre8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8665264, -0.0058179796, -0.1407845)
+
+[node name="TablePotion" parent="." instance=ExtResource("4_ggopc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.001126945, -0.0058179796, 0.07476711)
+
+[node name="ShopWindow" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.30897868, 0)
+script = ExtResource("5_1nl0s")
+cost = 3
+
+[node name="EnemySpawns" type="Node3D" parent="."]
+
+[node name="ItemSpawns" type="Node3D" parent="."]

@@ -33,7 +33,9 @@ var _isCaptured = false
 
 @export var _canFlip = false
 
-var _spawnTime = 10.0
+@export var _coinsToSpawn = 2
+
+var _spawnTime = 8.0
 
 func _ready() -> void:
 	super()
@@ -63,7 +65,7 @@ func _process(delta: float) -> void:
 	if _canFlip:
 		if _moveX > 0 and !_sprite.flip_h:
 			_sprite.flip_h = true
-		elif _moveX <= 0 and _sprite.flip_h:
+		elif _moveX < 0 and _sprite.flip_h:
 			_sprite.flip_h = false
 	
 	return
@@ -254,11 +256,12 @@ func countdownCapture() -> void:
 	return
 
 func capture() -> void:
-	print("captured")
 	var creatureRecord = CreatureRecord.new(getKey(), getCreatureType(), getCreatureName(), getLevel(), getMaxHealth(), getMaxHealth(), false)
 	Global.creatureCollection[creatureRecord.key] = creatureRecord
 	Global.uiCreatureCollection.updateCollection(true)
-	die()
+	Global.enemyCreatures.erase(self)
+	Global.uiHealth.unregisterCreatureHealthBar(self)
+	queue_free()
 	return
 
 func release() -> void:
@@ -279,8 +282,22 @@ func die() -> void:
 			Global.uiCreatureCollection.updateCollection(true)
 	else:
 		Global.enemyCreatures.erase(self)
+	
+	spawnCoins()
+		
 	Global.uiHealth.unregisterCreatureHealthBar(self)
 	queue_free()
+	return
+	
+func spawnCoins() -> void:
+	for i in range(0, _coinsToSpawn):
+		var angle = deg_to_rad((360.0 / _coinsToSpawn) * i)
+		var x = global_position.x + cos(angle) * 0.5
+		var z = global_position.z + sin(angle) * 0.5
+		
+		var coin: Item = Global.coinScene.instantiate()
+		Global.add_child(coin)
+		coin.global_position = Vector3(x, 0.0, z)
 	return
 
 func returnToPlayer() -> void:

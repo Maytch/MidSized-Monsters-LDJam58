@@ -6,19 +6,22 @@ var uiHealth: UIHealth
 var uiCreatureCollection: UICreatureCollection
 var uiError: UIError
 var uiHotkeys: UIHotkeys
+var uiShop: UIShop
 
 var enemyCreatures: Array = []
 var friendCreatures: Array = []
 
 var creatureCollection = {}
 
-var potionCount = 50;
-var captureCount = 50;
+var potionCount = 5;
+var captureCount = 5;
+var coinCount = 5;
 
 var potionHealAmount = 40;
 
 enum AreaType { CAPTURE, POTION, SUMMON, ATTACK, ATTACK_FRIEND }
 enum CreatureType { SLIME, FLY, SNEK, MUSH, FIRN, SNEL, BIG_MUSH, DINO }
+enum ItemType { POTION, CAPTURE, COIN }
 
 var projectileScene = preload("res://scenes/projectile.tscn")
 var areaOfEffectScene = preload("res://scenes/area_of_effect.tscn")
@@ -31,6 +34,10 @@ var firnScene = preload("res://scenes/firn.tscn")
 var snelScene = preload("res://scenes/snel.tscn")
 var bigMushScene = preload("res://scenes/big_mush.tscn")
 var dinoScene = preload("res://scenes/dino.tscn")
+
+var potionScene = preload("res://scenes/item_potion.tscn")
+var captureScene = preload("res://scenes/item_capture.tscn")
+var coinScene = preload("res://scenes/item_coin.tscn")
 
 func spawnCreature(creatureType: CreatureType) -> Creature:
 	var object = null

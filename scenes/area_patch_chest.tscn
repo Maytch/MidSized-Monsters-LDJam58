@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1idffdaf7jjk"]
+
+[ext_resource type="Script" uid="uid://50ur76osi737" path="res://scripts/area_patch.gd" id="1_25wsj"]
+[ext_resource type="PackedScene" uid="uid://ybb2r3iggemn" path="res://scenes/chest.tscn" id="2_25wsj"]
+
+[node name="ChestPatch" type="Node3D"]
+script = ExtResource("1_25wsj")
+_patchType = 1
+_enemySpawnChance = 0.0
+_itemSpawnChance = 0.75
+
+[node name="Chest" parent="." instance=ExtResource("2_25wsj")]
+
+[node name="EnemySpawns" type="Node3D" parent="."]
+
+[node name="ItemSpawns" type="Node3D" parent="."]
+
+[node name="Node3D" type="Node3D" parent="ItemSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.041145444, 0, 0.35491252)
+
+[node name="Node3D2" type="Node3D" parent="ItemSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.813519, 0, -0.015227795)
+
+[node name="Node3D3" type="Node3D" parent="ItemSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9282812, 0, 0.7591336)
+
+[node name="Node3D4" type="Node3D" parent="ItemSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.16635, 0, 1.1726775)
+
+[node name="Node3D5" type="Node3D" parent="ItemSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2924726, 0, -0.18362999)
+
+[node name="Node3D6" type="Node3D" parent="ItemSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.78759027, 0, -0.65340805)

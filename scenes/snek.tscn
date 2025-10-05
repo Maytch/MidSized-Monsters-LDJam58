@@ -19,6 +19,7 @@ _creatureFriendTexture = ExtResource("3_sfl2l")
 _capturingTexture = ExtResource("4_sfl2l")
 _capturedTexture = ExtResource("5_ejuo4")
 _canFlip = true
+_coinsToSpawn = 4
 _movementSpeed = 0.75
 
 [node name="Body" type="Node3D" parent="."]

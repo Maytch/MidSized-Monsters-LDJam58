@@ -4,7 +4,6 @@ class_name UIHealth
 @onready var _panelContainer = $PanelContainer
 
 var _healthBars = {}
-var _registeredPendingCreatures: Array = []
 
 var _maxDistanceFromPlayer = 40
 

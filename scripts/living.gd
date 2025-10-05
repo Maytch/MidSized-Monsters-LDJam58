@@ -80,6 +80,9 @@ func processMovementBounce(delta: float) -> void:
 	return
 
 func processBodyAnimation(delta: float) -> void:
+	if _sprite.hframes == 1:
+		return
+		
 	_currentBodyFrameTime -= delta * _bodyAnimationSpeed
 	
 	if _currentBodyFrameTime <= 0:

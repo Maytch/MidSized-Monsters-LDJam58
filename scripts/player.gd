@@ -26,8 +26,10 @@ func _ready() -> void:
 	Global.creatureCollection["creature_1"] = _selectedCreatureToSummon
 	Global.uiCreatureCollection.updateCollection(true)
 	
+	Global.uiShop.updateKey()
+	
 	Global.uiHotkeys.updateKeys()
-	Global.uiHotkeys.updateQuantities(Global.captureCount, Global.potionCount)
+	Global.uiHotkeys.updateQuantities(Global.captureCount, Global.potionCount, Global.coinCount)
 	
 	_currentAction = PlayerAction.SUMMON
 	_areaOfEffect.setTexture(Global.AreaType.SUMMON)
@@ -82,6 +84,9 @@ func processPlayerInput() -> void:
 		else:
 			_selectedCreatureIndex -= 1
 			Global.uiCreatureCollection.updateScrollToSelected(_selectedCreatureIndex)
+			
+	if Input.is_action_just_pressed("buy_action"):
+		Global.uiShop.tryToBuyItem()
 		
 	if Input.is_action_just_pressed("select_area"):
 		match _currentAction:
@@ -107,7 +112,7 @@ func throwPotion() -> void:
 	projectile.setupPotion(Global.potionHealAmount)
 	
 	Global.potionCount -= 1
-	Global.uiHotkeys.updateQuantities(Global.captureCount, Global.potionCount)
+	Global.uiHotkeys.updateQuantities(Global.captureCount, Global.potionCount, Global.coinCount)
 	_potionCooldown = _maxPotionCooldown
 	return
 	
@@ -124,7 +129,7 @@ func throwCapture() -> void:
 	projectile.setupCapture()
 	
 	Global.captureCount -= 1
-	Global.uiHotkeys.updateQuantities(Global.captureCount, Global.potionCount)
+	Global.uiHotkeys.updateQuantities(Global.captureCount, Global.potionCount, Global.coinCount)
 	_captureCooldown = _maxCaptureCooldown
 	return
 	

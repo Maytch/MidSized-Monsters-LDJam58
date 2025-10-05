@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1rj0t8t0gwhu"]
+
+[ext_resource type="Script" uid="uid://50ur76osi737" path="res://scripts/area_patch.gd" id="1_5m2p0"]
+[ext_resource type="PackedScene" uid="uid://c8be2lgdiydef" path="res://scenes/cave.tscn" id="2_5m2p0"]
+
+[node name="CavePatch" type="Node3D"]
+script = ExtResource("1_5m2p0")
+_patchType = 0
+_enemySpawnChance = 0.75
+_itemSpawnChance = 0.1
+
+[node name="Cave" parent="." instance=ExtResource("2_5m2p0")]
+
+[node name="EnemySpawns" type="Node3D" parent="."]
+
+[node name="Node3D" type="Node3D" parent="EnemySpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7112109, 0, 0.60123193)
+
+[node name="Node3D2" type="Node3D" parent="EnemySpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.66174716, 0, 1.2691251)
+
+[node name="ItemSpawns" type="Node3D" parent="."]
+
+[node name="Node3D" type="Node3D" parent="ItemSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.041145444, 0, 0.35491252)

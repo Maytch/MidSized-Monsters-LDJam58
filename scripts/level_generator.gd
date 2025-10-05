@@ -1,7 +1,13 @@
 extends Node3D
 class_name LevelGenerator
 
+@export var _cavePatch: PackedScene
+@export var _chestPatch: PackedScene
 @export var _grassPatch: PackedScene
+@export var _grassLotsPatch: PackedScene
+@export var _shopCapturePatch: PackedScene
+@export var _shopPotionPatch: PackedScene
+@export var _treePatch: PackedScene
 
 var _delayProcessTime = 0.0
 @export var _maxDelayProcessTime = 1.0
@@ -84,10 +90,31 @@ func getAdjacentCoords(coord: Vector2i) -> Array:
 	return coords
 	
 func generateAreaPatch(coord: Vector2i) -> AreaPatch:
-	var patch: AreaPatch = _grassPatch.instantiate()
+	var patches: Array[PackedScene] = []
+	patches.append(_grassPatch)
+	patches.append(_grassPatch)
+	patches.append(_grassPatch)
+	patches.append(_grassPatch)
+	patches.append(_cavePatch)
+	patches.append(_chestPatch)
+	patches.append(_treePatch)
+	patches.append(_treePatch)
+	patches.append(_grassLotsPatch)
+	patches.append(_grassLotsPatch)
+	patches.append(_shopCapturePatch)
+	patches.append(_shopPotionPatch)
+	
+	var index = randi_range(0, patches.size() - 1)
+	
+	var scene = patches[index]
+	
+	if coord == Vector2i.ZERO:
+		scene = _grassPatch
+
+	var patch: AreaPatch = scene.instantiate()
 	add_child(patch)
-	patch.generate(_possibleEnemyTypes, _possibleMissingEnemyTypes)
 	patch.global_position = Vector3(coord.x * _areaWidth, 0.0, coord.y * _areaWidth)
+	patch.generate(_possibleEnemyTypes, _possibleMissingEnemyTypes)
 	return patch
 	
 func generatePossibleEnemyTypes() -> void:
@@ -110,11 +137,6 @@ func generatePossibleEnemyTypes() -> void:
 		_possibleEnemyTypes.append(_enemyTypes.get(i))
 		if !existingEnemiesByLevel.has(i):
 			_possibleMissingEnemyTypes.append(_enemyTypes.get(i))
-	
-	print("existingEnemiesByLevel ", existingEnemiesByLevel.size())
-	print("maxLevel ", maxLevel)
-	print("_possibleEnemyTypes ", _possibleEnemyTypes.size())
-	print("_possibleMissingEnemyTypes ", _possibleMissingEnemyTypes.size())
 	
 	return
 

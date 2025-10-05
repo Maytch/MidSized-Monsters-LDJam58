@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dilo4t5v5w234"]
+
+[ext_resource type="Script" uid="uid://c3kydi3wwr682" path="res://scripts/item.gd" id="1_x7npw"]
+[ext_resource type="Texture2D" uid="uid://df7fio3qygjrr" path="res://sprites/coin.png" id="2_x7npw"]
+
+[node name="CoinItem" type="Node3D"]
+script = ExtResource("1_x7npw")
+_itemType = 2
+
+[node name="Body" type="Node3D" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11815949, 0)
+alpha_cut = 2
+texture_filter = 2
+texture = ExtResource("2_x7npw")

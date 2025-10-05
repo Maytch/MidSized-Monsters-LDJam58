@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://2kf1acsp5hrj"]
+
+[ext_resource type="Script" uid="uid://b0lh14443rift" path="res://scripts/face_camera.gd" id="1_yarb5"]
+[ext_resource type="Texture2D" uid="uid://cqasun6xivkkk" path="res://sprites/grass.png" id="6_48p3m"]
+
+[node name="Grass" type="Node3D"]
+script = ExtResource("1_yarb5")
+
+[node name="Body" type="Node3D" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18235289, 0)
+alpha_cut = 2
+texture_filter = 2
+texture = ExtResource("6_48p3m")

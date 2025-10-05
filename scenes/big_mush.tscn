@@ -19,6 +19,7 @@ _creatureTexture = ExtResource("2_whuil")
 _creatureFriendTexture = ExtResource("3_ld83v")
 _capturingTexture = ExtResource("4_dbrjx")
 _capturedTexture = ExtResource("5_vh3ib")
+_coinsToSpawn = 5
 _movementSpeed = 0.5
 
 [node name="Body" type="Node3D" parent="."]
