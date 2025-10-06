@@ -1,7 +1,9 @@
 ![Ludum Dare](https://img.shields.io/badge/LudumDare-58-f79122?labelColor=ee5533&link=https%3A%2F%2Fldjam.com%2Fevents%2Fludum-dare%2F58)
 ![Ludum Dare 58 - Compo](https://img.shields.io/badge/LudumDare58-Compo-ee5533?&link=https%3A%2F%2Fldjam.com%2Fevents%2Fludum-dare%2F58)
 
-Screenshot 2025-10-06 at 08.35.40.png
+- Play here - https://maytch.itch.io/midsizedmonsters-ldjam58
+- Ludum Dare page here - https://ldjam.com/events/ludum-dare/58/mid-sized-monsters
+
 ## Mid-Sized Monsters
 
 Welcome to the world of Mid-Sized Monsters! Or MidMon for short - Monsters that can fit inside your briefcase. You play as Arnold who has left home at the age of 30 with the goal of collecting every MidMon in the world. 
